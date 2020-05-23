@@ -1,9 +1,7 @@
 import React from 'react';
 
+import '../stylesheets/Header.css';
+
 export const Header = () => {
-  return (
-    <div>
-      <h1>Headers!</h1>
-    </div>
-  );
+  return <h1>Minesweeper</h1>;
 };

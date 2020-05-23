@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { initBoard } from '../actions/initBoard';
-import { renderBoard } from '../actions/renderBoard';
+import { initBoard } from '../../actions/initBoard';
+import { renderBoard } from '../../actions/renderBoard';
 import PropTypes from 'prop-types';
 
+import './Board.css';
 export default class Board extends Component {
   constructor(props) {
     super(props);
@@ -18,9 +19,7 @@ export default class Board extends Component {
     return (
       <div className='board'>
         <div className='game-info'>
-          <span className='info'>mines: {this.state.mines}</span>
-          <br />
-          <span className='info'>{this.state.gameEnded}</span>
+          <span className='info'>Mines Left: {this.state.mines}</span>
         </div>
         {renderBoard(this.state.board)}
       </div>
