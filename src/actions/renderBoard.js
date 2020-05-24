@@ -1,6 +1,6 @@
 import React from 'react';
 
-// import Cell from '../components/Cell';
+import Cell from '../components/Cell/Cell';
 
 export const renderBoard = (data) => {
   return (
@@ -11,9 +11,14 @@ export const renderBoard = (data) => {
             <div style={rowStyle}>
               {row.map((item) => {
                 return (
-                  <div style={cellStyle} key={item.x * row.length + item.y}>
-                    {item.isMine ? 'x' : item.neighborCount}
-                  </div>
+                  <Cell
+                    key={item.x * row.length + item.y}
+                    data={item}
+                    leftClick={''}
+                    rightClick={''}
+                  >
+                    {/* {item.isMine ? 'x' : item.neighborCount} */}
+                  </Cell>
                 );
               })}
             </div>
@@ -38,16 +43,16 @@ const colStyle = {
   textAlign: 'center',
 };
 
-const cellStyle = {
-  width: '2rem',
-  height: '2rem',
-  margin: '1px',
-  display: 'flex',
-  justifyContent: 'center',
-  flexDirection: 'column',
-  textAlign: 'center',
-  backgroundColor: 'lightgray',
-};
+// const cellStyle = {
+//   width: '2rem',
+//   height: '2rem',
+//   margin: '1px',
+//   display: 'flex',
+//   justifyContent: 'center',
+//   flexDirection: 'column',
+//   textAlign: 'center',
+//   backgroundColor: 'lightgray',
+// };
 
 const boardStyle = {
   display: 'inline-block',

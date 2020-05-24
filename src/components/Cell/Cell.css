@@ -1,0 +1,10 @@
+.coveredCell {
+  width: '2rem';
+  height: '2rem';
+  margin: '1px';
+  display: 'flex';
+  justify-content: 'center';
+  flex-direction: 'column';
+  text-align: 'center';
+  background-color: 'lightgray';
+}
