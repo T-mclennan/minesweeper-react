@@ -2,7 +2,7 @@ class Game extends React.Component {
   state = {
     height: 12,
     width: 12,
-    mines: 100,
+    mines: 10,
   };
   render() {
     const { height, width, mines } = this.state;

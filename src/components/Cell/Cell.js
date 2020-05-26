@@ -1,12 +1,52 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import corona from '../../assets/mines/icons8-coronavirus-64.png';
 import './Cell.css';
 
 const Cell = (props) => {
+  const { isMine, isFlagged, isVisible, neighborCount } = props.data;
+  const generateContent = () => {
+    let content = null;
+    if (isFlagged) {
+      content = '^';
+    } else if (isMine && isVisible) {
+      content = (
+        <img
+          style={{
+            marginLeft: '0.2rem',
+            width: '1.6rem',
+            height: '1.6rem',
+          }}
+          src={corona}
+          alt={'mine'}
+        />
+      );
+    } else if (neighborCount > 0) {
+      content = neighborCount;
+    }
+    return content;
+  };
+
+  const generateStyle = () => {
+    var style = {};
+    if (props.data.isVisible) {
+      style = seenCell;
+    } else {
+      style = coveredStyle;
+    }
+    return style;
+  };
+
+  const dynamicStyling = generateStyle();
+
   return (
-    <div style={{ ...coveredStyle, ...cellStyle }}>
-      {props.data.neighborCount}
+    <div
+      style={{ ...cellStyle, ...dynamicStyling }}
+      onClick={() => props.leftClick()}
+    >
+      {/* {props.data.neighborCount} */}
+      {generateContent()}
     </div>
   );
 };
@@ -24,9 +64,15 @@ const cellStyle = {
 };
 
 const coveredStyle = {
-  backgroundColor: 'lightgray',
-  color: 'lightgray',
-  border: '1px solid lightslategrey',
+  backgroundColor: '#a4b5bf',
+  color: '#a4b5bf',
+  border: '1px ridge rgb(108, 121, 134)',
+};
+
+const seenCell = {
+  backgroundColor: '#faf2f2',
+  color: 'green',
+  border: '1px ridge #faf2f2',
 };
 
 export default Cell;

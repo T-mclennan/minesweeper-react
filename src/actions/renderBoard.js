@@ -2,23 +2,21 @@ import React from 'react';
 
 import Cell from '../components/Cell/Cell';
 
-export const renderBoard = (data) => {
+export const renderBoard = (data, leftClickHandler, rightClickHandler) => {
   return (
     <div style={boardStyle}>
       <div style={colStyle}>
-        {data.map((row) => {
+        {data.map((row, i) => {
           return (
-            <div style={rowStyle}>
+            <div key={i} style={rowStyle}>
               {row.map((item) => {
                 return (
                   <Cell
                     key={item.x * row.length + item.y}
                     data={item}
-                    leftClick={''}
-                    rightClick={''}
-                  >
-                    {/* {item.isMine ? 'x' : item.neighborCount} */}
-                  </Cell>
+                    leftClick={() => leftClickHandler(item.x, item.y)}
+                    rightClick={() => rightClickHandler(item.x, item.y)}
+                  />
                 );
               })}
             </div>
@@ -43,24 +41,11 @@ const colStyle = {
   textAlign: 'center',
 };
 
-// const cellStyle = {
-//   width: '2rem',
-//   height: '2rem',
-//   margin: '1px',
-//   display: 'flex',
-//   justifyContent: 'center',
-//   flexDirection: 'column',
-//   textAlign: 'center',
-//   backgroundColor: 'lightgray',
-// };
-
 const boardStyle = {
   display: 'inline-block',
-  // margin: '2rem',
   padding: '1rem',
   borderRadius: '1rem',
   backgroundColor: '#faf2f2',
-  // f1d1d1
   maxWidth: '100rem',
   dropShadow: '',
 };
