@@ -33,6 +33,15 @@ export default class Board extends Component {
     }
   }
 
+  checkForWin = (board) => {
+    if (checkWin(board)) {
+      this.setState({
+        gameStatus: 'You win! Congratulations!',
+        playing: false,
+      });
+    }
+  };
+
   leftClickHandler = (x, y, finalClick) => {
     if (this.state.playing) {
       const { isVisible, isFlagged, isMine } = this.state.board[y][x];
@@ -57,6 +66,8 @@ export default class Board extends Component {
         updatedBoard = revealCells(updatedBoard, x, y);
         this.setState({ board: updatedBoard });
       }
+
+      this.checkForWin(updatedBoard);
     }
   };
 
@@ -66,21 +77,27 @@ export default class Board extends Component {
     const { isFlagged, isVisible } = this.state.board[y][x];
     let { mines, board } = this.state;
     if (!isVisible) {
-      updatedBoard[y][x].isFlagged = !isFlagged;
-      mines = updatedBoard[y][x].isFlagged ? mines - 1 : mines + 1;
+      //Only place flags if there are more to place:
+      if (!updatedBoard[y][x].isFlagged) {
+        if (mines > 0) {
+          updatedBoard[y][x].isFlagged = !isFlagged;
+          mines--;
+        }
+
+        //Always remove flags:
+      } else {
+        updatedBoard[y][x].isFlagged = !isFlagged;
+        mines++;
+      }
+
       this.setState({
         board: updatedBoard,
         mines: mines,
         gameStatus: `Mines remaining: ${mines}`,
       });
     }
-    if (checkWin(board)) {
-      console.log('you win!');
-      this.setState({
-        gameStatus: 'You win! Congratulations!',
-        playing: false,
-      });
-    }
+
+    this.checkForWin(updatedBoard);
   };
 
   render() {

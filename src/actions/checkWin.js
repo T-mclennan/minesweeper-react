@@ -1,11 +1,19 @@
 export const checkWin = (board) => {
-  let over = true;
+  let win = true;
   board.forEach((row) => {
     row.forEach((cell) => {
-      if (!cell.isFlagged || !cell.isVisible) {
-        over = false;
+      if (
+        (!cell.isVisible && !cell.isFlagged) ||
+        (!cell.isFlagged && cell.isMine)
+      ) {
+        console.log(
+          `x:${cell.x} y:${cell.y} ${cell.isVisible} ${cell.isFlagged} `
+        );
+        win = false;
       }
     });
   });
-  return over;
+
+  console.log(win);
+  return win;
 };

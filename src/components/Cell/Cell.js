@@ -119,7 +119,9 @@ const cellStyle = {
 const coveredStyle = {
   backgroundColor: '#a4b5bf',
   color: '#a4b5bf',
-  border: '1px ridge rgb(108, 121, 134)',
+  borderWidth: '1px',
+  borderColor: 'rgb(138, 151, 163)',
+  borderStyle: 'outset',
 };
 
 const seenCell = {
