@@ -81,6 +81,84 @@ const checkNeighbors = (board, height, width) => {
   return board;
 };
 
+const getNeighbors = (board, x, y) => {
+  console.log(`Getting neighbors for: x:${x} y:${y}`);
+  const neighbors = [];
+  const height = board.length;
+  const width = board[0].length;
+  // top:
+  if (y > 0) {
+    neighbors.push(board[y - 1][x]);
+
+    // top left:
+    if (x > 0) {
+      neighbors.push(board[y - 1][x - 1]);
+    }
+
+    //top right:
+    if (x + 1 < width) {
+      neighbors.push(board[y - 1][x + 1]);
+    }
+  }
+
+  //bottom:
+  if (y + 1 < height) {
+    neighbors.push(board[y + 1][x]);
+
+    // bottom left:
+    if (x > 0) {
+      neighbors.push(board[y + 1][x - 1]);
+    }
+
+    //bottom right:
+    if (x + 1 < width) {
+      neighbors.push(board[y + 1][x + 1]);
+    }
+  }
+
+  // left:
+  if (x > 0) {
+    neighbors.push(board[y][x - 1]);
+  }
+
+  //right:
+  if (x + 1 < width) {
+    neighbors.push(board[y][x + 1]);
+  }
+
+  return neighbors;
+};
+
+export const showBoard = (board) => {
+  let updatedBoard = board;
+  for (let y = 0; y < board.length; y++) {
+    for (let x = 0; x < board[0].length; x++) {
+      board[y][x].isVisible = true;
+    }
+  }
+  return updatedBoard;
+};
+
+export const revealCells = (board, x, y) => {
+  let updatedBoard = board;
+  const checkCell = (x, y) => {
+    // const { isMine, isFlagged, isVisible, neighborCount } = updatedBoard[x][y];
+
+    const neighbors = getNeighbors(updatedBoard, x, y);
+    neighbors.map((cell) => {
+      if (!cell.isFlagged && !cell.isVisible && !cell.isMine) {
+        updatedBoard[cell.y][cell.x].isVisible = true;
+        if (cell.neighborCount === 0) {
+          checkCell(cell.x, cell.y);
+        }
+      }
+    });
+  };
+
+  checkCell(x, y);
+  return updatedBoard;
+};
+
 export const initBoard = (height, width, mineCount) => {
   let board = generateBoard(height, width);
   board = generateMines(board, height, width, mineCount);

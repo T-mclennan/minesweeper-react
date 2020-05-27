@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { initBoard } from '../../actions/initBoard';
+import { initBoard, revealCells, showBoard } from '../../actions/initBoard';
 import { renderBoard } from '../../actions/renderBoard';
 import PropTypes from 'prop-types';
 
@@ -20,6 +20,7 @@ export default class Board extends Component {
       board: initBoard(this.props.height, this.props.width, this.props.mines),
       mines: this.props.mines,
       gameStatus: null,
+      playing: true,
     };
   }
 
@@ -29,19 +30,26 @@ export default class Board extends Component {
     }
   }
 
-  leftClickHandler = (y, x) => {
-    const { isVisible, isFlagged, isMine } = this.state.board[x][y];
-    let { board } = this.state;
+  leftClickHandler = (x, y) => {
+    if (this.state.playing) {
+      console.log(`Checking: x:${x} y:${y}`);
+      const { isVisible, isFlagged, isMine } = this.state.board[y][x];
+      let updatedBoard = this.state.board;
 
-    if (isVisible || isFlagged) return null;
+      if (isVisible || isFlagged) return null;
 
-    if (isMine) {
-      this.setState({ gameStatus: 'Game over, you lost!' });
-    }
+      if (isMine) {
+        this.setState({
+          gameStatus: 'Game over, you lost!',
+          playing: false,
+          board: showBoard(this.state.board),
+        });
+      }
 
-    if (!isVisible) {
-      board[x][y].isVisible = true;
-      this.setState({ board: board });
+      if (!isVisible) {
+        updatedBoard = revealCells(updatedBoard, x, y);
+        this.setState({ board: updatedBoard });
+      }
     }
   };
 
