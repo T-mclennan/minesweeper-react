@@ -35,7 +35,6 @@ export default class Board extends Component {
       this.setState({
         gameStatus: 'You win! Congratulations!',
         playing: false,
-        // board: showBoard(this.state.board),
       });
     }
   }
@@ -66,10 +65,15 @@ export default class Board extends Component {
     event.preventDefault();
     let updatedBoard = this.state.board;
     const { isFlagged, isVisible } = this.state.board[y][x];
-
+    let { mines } = this.state;
     if (!isVisible) {
       updatedBoard[y][x].isFlagged = !isFlagged;
-      this.setState({ board: updatedBoard });
+      mines = updatedBoard[y][x].isFlagged ? mines - 1 : mines + 1;
+      this.setState({
+        board: updatedBoard,
+        mines: mines,
+        gameStatus: `Mines remaining: ${mines}`,
+      });
     }
   };
 

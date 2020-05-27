@@ -82,7 +82,6 @@ const checkNeighbors = (board, height, width) => {
 };
 
 const getNeighbors = (board, x, y) => {
-  console.log(`Getting neighbors for: x:${x} y:${y}`);
   const neighbors = [];
   const height = board.length;
   const width = board[0].length;
