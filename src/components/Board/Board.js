@@ -22,6 +22,7 @@ export default class Board extends Component {
       mines: this.props.mines,
       gameStatus: null,
       playing: true,
+      finalCell: {},
     };
   }
 
@@ -30,16 +31,9 @@ export default class Board extends Component {
     if (!gameStatus) {
       this.setState({ gameStatus: `Mines remaining: ${mines}` });
     }
-
-    if (checkWin(board)) {
-      this.setState({
-        gameStatus: 'You win! Congratulations!',
-        playing: false,
-      });
-    }
   }
 
-  leftClickHandler = (x, y) => {
+  leftClickHandler = (x, y, finalClick) => {
     if (this.state.playing) {
       const { isVisible, isFlagged, isMine } = this.state.board[y][x];
       let updatedBoard = this.state.board;
@@ -47,10 +41,15 @@ export default class Board extends Component {
       if (isVisible || isFlagged) return null;
 
       if (isMine) {
+        finalClick();
         this.setState({
           gameStatus: 'Game over, you lost!',
           playing: false,
           board: showBoard(this.state.board),
+          finalCell: {
+            x,
+            y,
+          },
         });
       }
 
@@ -65,7 +64,7 @@ export default class Board extends Component {
     event.preventDefault();
     let updatedBoard = this.state.board;
     const { isFlagged, isVisible } = this.state.board[y][x];
-    let { mines } = this.state;
+    let { mines, board } = this.state;
     if (!isVisible) {
       updatedBoard[y][x].isFlagged = !isFlagged;
       mines = updatedBoard[y][x].isFlagged ? mines - 1 : mines + 1;
@@ -73,6 +72,13 @@ export default class Board extends Component {
         board: updatedBoard,
         mines: mines,
         gameStatus: `Mines remaining: ${mines}`,
+      });
+    }
+    if (checkWin(board)) {
+      console.log('you win!');
+      this.setState({
+        gameStatus: 'You win! Congratulations!',
+        playing: false,
       });
     }
   };

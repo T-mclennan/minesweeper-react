@@ -1,12 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import corona from '../../assets/mines/icons8-coronavirus-64.png';
-import flag from '../../assets/flags/blue-flag.png';
+import corona from '../../assets/mines/purple-mine.png';
+import foundCorona from '../../assets/mines/red-mine.png';
+import flag from '../../assets/flags/red-flag.png';
 import './Cell.css';
 
 const Cell = (props) => {
   const { isMine, isFlagged, isVisible, neighborCount } = props.data;
+
+  const [lastCell, setLastCell] = useState(false);
+
+  const finalClick = () => {
+    setLastCell(true);
+  };
   const generateContent = () => {
     let content = null;
     if (isFlagged) {
@@ -22,6 +29,7 @@ const Cell = (props) => {
         />
       );
     } else if (isMine && isVisible) {
+      const mineVersion = lastCell ? foundCorona : corona;
       content = (
         <img
           style={{
@@ -29,7 +37,7 @@ const Cell = (props) => {
             width: '1.6rem',
             height: '1.6rem',
           }}
-          src={corona}
+          src={mineVersion}
           alt={'mine'}
         />
       );
@@ -42,11 +50,11 @@ const Cell = (props) => {
   const generateColor = (num) => {
     switch (num) {
       case 1:
-        return 'salmon';
+        return '#001f3f';
       case 2:
-        return 'gold';
-      case 3:
         return 'darkcyan';
+      case 3:
+        return 'deepskyblue';
       case 4:
         return 'mediumaquamarine';
       case 5:
@@ -54,9 +62,9 @@ const Cell = (props) => {
       case 6:
         return 'orchid';
       case 7:
-        return 'deepskyblue';
-      case 8:
         return 'violet';
+      case 8:
+        return 'gold';
       default:
         return '#faf2f2';
     }
@@ -66,9 +74,18 @@ const Cell = (props) => {
     const { isVisible, neighborCount, isFlagged } = props.data;
 
     if (isFlagged) {
-      return { ...coveredStyle, color: 'red', fontSize: '2rem' };
-    } else if (isVisible) {
+      return { ...coveredStyle, color: 'red', fontSize: '1.8rem' };
+    } else if (lastCell) {
+      return {
+        ...seenCell,
+        backgroundColor: 'rgb(252, 214, 210)',
+
+        border: '1px ridge rgb(159, 197, 195)',
+      };
+    } else if (isVisible && neighborCount > 0) {
       return { ...seenCell, color: generateColor(neighborCount) };
+    } else if (isVisible && neighborCount === 0) {
+      return emptyCell;
     } else {
       return coveredStyle;
     }
@@ -79,7 +96,7 @@ const Cell = (props) => {
   return (
     <div
       style={{ ...cellStyle, ...dynamicStyling }}
-      onClick={() => props.leftClick()}
+      onClick={() => props.leftClick(finalClick)}
       onContextMenu={(e) => props.rightClick(e)}
     >
       {generateContent()}
@@ -106,9 +123,14 @@ const coveredStyle = {
 };
 
 const seenCell = {
+  fontSize: '1.2rem',
+  border: '1px dotted lightgray',
+};
+
+const emptyCell = {
   backgroundColor: '#faf2f2',
-  color: 'green',
-  border: '1px ridge #faf2f2',
+  fontSize: '1.5rem',
+  border: '1px dotted rgb(218, 218, 218)',
 };
 
 export default Cell;

@@ -14,7 +14,9 @@ export const renderBoard = (data, leftClickHandler, rightClickHandler) => {
                   <Cell
                     key={item.x * row.length + item.y}
                     data={item}
-                    leftClick={() => leftClickHandler(item.x, item.y)}
+                    leftClick={(finalClick) =>
+                      leftClickHandler(item.x, item.y, finalClick)
+                    }
                     rightClick={(e) => rightClickHandler(e, item.x, item.y)}
                   />
                 );
