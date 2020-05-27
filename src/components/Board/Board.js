@@ -62,7 +62,16 @@ export default class Board extends Component {
     }
   };
 
-  rightClickHandler = (x, y) => {};
+  rightClickHandler = (event, x, y) => {
+    event.preventDefault();
+    let updatedBoard = this.state.board;
+    const { isFlagged, isVisible } = this.state.board[y][x];
+
+    if (!isVisible) {
+      updatedBoard[y][x].isFlagged = !isFlagged;
+      this.setState({ board: updatedBoard });
+    }
+  };
 
   render() {
     return (

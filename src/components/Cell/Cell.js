@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import corona from '../../assets/mines/icons8-coronavirus-64.png';
+import flag from '../../assets/flags/blue-flag.png';
 import './Cell.css';
 
 const Cell = (props) => {
@@ -9,7 +10,17 @@ const Cell = (props) => {
   const generateContent = () => {
     let content = null;
     if (isFlagged) {
-      content = '^';
+      content = (
+        <img
+          style={{
+            marginLeft: '0.2rem',
+            width: '1.4rem',
+            height: '1.4rem',
+          }}
+          src={flag}
+          alt={'flag'}
+        />
+      );
     } else if (isMine && isVisible) {
       content = (
         <img
@@ -52,9 +63,11 @@ const Cell = (props) => {
   };
 
   const generateStyle = () => {
-    const { isVisible, neighborCount } = props.data;
+    const { isVisible, neighborCount, isFlagged } = props.data;
 
-    if (isVisible) {
+    if (isFlagged) {
+      return { ...coveredStyle, color: 'red', fontSize: '2rem' };
+    } else if (isVisible) {
       return { ...seenCell, color: generateColor(neighborCount) };
     } else {
       return coveredStyle;
@@ -67,8 +80,8 @@ const Cell = (props) => {
     <div
       style={{ ...cellStyle, ...dynamicStyling }}
       onClick={() => props.leftClick()}
+      onContextMenu={(e) => props.rightClick(e)}
     >
-      {/* {props.data.neighborCount} */}
       {generateContent()}
     </div>
   );
