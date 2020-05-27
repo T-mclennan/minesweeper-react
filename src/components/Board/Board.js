@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { initBoard, revealCells, showBoard } from '../../actions/initBoard';
 import { renderBoard } from '../../actions/renderBoard';
+import { checkWin } from '../../actions/checkWin';
 import PropTypes from 'prop-types';
 
 import './Board.css';
@@ -25,14 +26,22 @@ export default class Board extends Component {
   }
 
   componentDidMount() {
-    if (!this.state.gameStatus) {
-      this.setState({ gameStatus: `Mines remaining: ${this.state.mines}` });
+    const { gameStatus, mines, board } = this.state;
+    if (!gameStatus) {
+      this.setState({ gameStatus: `Mines remaining: ${mines}` });
+    }
+
+    if (checkWin(board)) {
+      this.setState({
+        gameStatus: 'You win! Congratulations!',
+        playing: false,
+        // board: showBoard(this.state.board),
+      });
     }
   }
 
   leftClickHandler = (x, y) => {
     if (this.state.playing) {
-      console.log(`Checking: x:${x} y:${y}`);
       const { isVisible, isFlagged, isMine } = this.state.board[y][x];
       let updatedBoard = this.state.board;
 

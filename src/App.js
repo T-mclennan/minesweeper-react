@@ -8,7 +8,7 @@ function App() {
   return (
     <div className='App'>
       {/* <Header /> */}
-      <Board width={12} height={12} mines={10} />
+      <Board width={12} height={12} mines={60} />
     </div>
   );
 }

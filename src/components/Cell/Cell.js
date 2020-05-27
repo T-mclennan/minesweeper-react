@@ -28,14 +28,37 @@ const Cell = (props) => {
     return content;
   };
 
-  const generateStyle = () => {
-    var style = {};
-    if (props.data.isVisible) {
-      style = seenCell;
-    } else {
-      style = coveredStyle;
+  const generateColor = (num) => {
+    switch (num) {
+      case 1:
+        return 'salmon';
+      case 2:
+        return 'gold';
+      case 3:
+        return 'darkcyan';
+      case 4:
+        return 'mediumaquamarine';
+      case 5:
+        return 'cornflowerblue';
+      case 6:
+        return 'orchid';
+      case 7:
+        return 'deepskyblue';
+      case 8:
+        return 'violet';
+      default:
+        return '#faf2f2';
     }
-    return style;
+  };
+
+  const generateStyle = () => {
+    const { isVisible, neighborCount } = props.data;
+
+    if (isVisible) {
+      return { ...seenCell, color: generateColor(neighborCount) };
+    } else {
+      return coveredStyle;
+    }
   };
 
   const dynamicStyling = generateStyle();

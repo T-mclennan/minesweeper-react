@@ -141,11 +141,10 @@ export const showBoard = (board) => {
 
 export const revealCells = (board, x, y) => {
   let updatedBoard = board;
+  updatedBoard[y][x].isVisible = true;
   const checkCell = (x, y) => {
-    // const { isMine, isFlagged, isVisible, neighborCount } = updatedBoard[x][y];
-
     const neighbors = getNeighbors(updatedBoard, x, y);
-    neighbors.map((cell) => {
+    neighbors.forEach((cell) => {
       if (!cell.isFlagged && !cell.isVisible && !cell.isMine) {
         updatedBoard[cell.y][cell.x].isVisible = true;
         if (cell.neighborCount === 0) {
@@ -154,7 +153,6 @@ export const revealCells = (board, x, y) => {
       }
     });
   };
-
   checkCell(x, y);
   return updatedBoard;
 };
