@@ -21,8 +21,8 @@ const Cell = (props) => {
         <img
           style={{
             marginLeft: '0.2rem',
-            width: '1.4rem',
-            height: '1.4rem',
+            width: '1.1rem',
+            height: '1.1rem',
           }}
           src={flag}
           alt={'flag'}
@@ -42,7 +42,7 @@ const Cell = (props) => {
         />
       );
     } else if (neighborCount > 0) {
-      content = neighborCount;
+      content = <h5>{neighborCount}</h5>;
     }
     return content;
   };
@@ -80,7 +80,7 @@ const Cell = (props) => {
         ...seenCell,
         backgroundColor: 'rgb(252, 214, 210)',
 
-        border: '1px ridge rgb(159, 197, 195)',
+        border: '1px ridge red',
       };
     } else if (isVisible && neighborCount > 0) {
       return { ...seenCell, color: generateColor(neighborCount) };
@@ -107,8 +107,8 @@ const Cell = (props) => {
 Cell.propTypes = {};
 
 const cellStyle = {
-  width: '2rem',
-  height: '2rem',
+  width: '1.6rem',
+  height: '1.6rem',
   margin: '1px',
   display: 'flex',
   justifyContent: 'center',

@@ -1,7 +1,9 @@
 .game-status {
-  margin: auto;
+  margin: 0 3rem;
   color: white;
-  font-size: 1.6rem;
+  font-size: 1rem;
   font: small-caps 43px/150% 'Segoe UI', Frutiger, 'Frutiger Linotype',
     'Dejavu Sans', 'Helvetica Neue', Arial, sans-serif;
+
+  justify-content: space-evenly;
 }

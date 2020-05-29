@@ -49,6 +49,7 @@ class Clock extends Component {
 
   stopClock = () => {
     this.setState({ timerOn: false });
+    this.props.updateTime(this.state.timerTime);
     clearInterval(this.timer);
   };
 

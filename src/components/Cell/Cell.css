@@ -1,13 +1,9 @@
-.coveredCell {
-  width: '2rem';
-  height: '2rem';
-  margin: '1px';
-  display: 'flex';
-  justify-content: 'center';
-  flex-direction: 'column';
-  text-align: 'center';
-  background-color: 'lightgray';
-  border-width: '1px';
-  border-style: ridge;
-  background-color: rgb(138, 151, 163);
+img,
+h5 {
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
 }

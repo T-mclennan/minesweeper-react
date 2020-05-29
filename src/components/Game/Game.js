@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { initBoard, revealCells, showBoard } from '../../actions/initBoard';
 import { renderBoard } from '../../actions/renderBoard';
-import { checkWin } from '../../actions/checkWin';
+import { checkWin, generateScore } from '../../actions/checkWin';
 import PropTypes from 'prop-types';
 
-import './Game.css';
 import InfoBar from '../InfoBar/InfoBar';
+import './Game.css';
+
 export default class Game extends Component {
   constructor(props) {
     super(props);
@@ -13,9 +14,10 @@ export default class Game extends Component {
     this.state = {
       board: initBoard(this.props.height, this.props.width, this.props.mines),
       mines: this.props.mines,
-      gameStatus: null,
+      gameStatus: '',
       playing: true,
       finalCell: {},
+      score: 0,
     };
   }
 
@@ -29,7 +31,7 @@ export default class Game extends Component {
   checkForWin = (board) => {
     if (checkWin(board)) {
       this.setState({
-        gameStatus: 'You win! Congratulations!',
+        gameStatus: `You win!`,
         playing: false,
       });
     }
@@ -68,8 +70,8 @@ export default class Game extends Component {
     event.preventDefault();
     let updatedBoard = this.state.board;
     const { isFlagged, isVisible } = this.state.board[y][x];
-    let { mines } = this.state;
-    if (!isVisible) {
+    let { mines, playing } = this.state;
+    if (!isVisible && playing) {
       //Only place flags if there are more to place:
       if (!updatedBoard[y][x].isFlagged) {
         if (mines > 0) {
@@ -93,10 +95,32 @@ export default class Game extends Component {
     this.checkForWin(updatedBoard);
   };
 
+  updateTimeUsed = (elapsed) => {
+    this.setState({ score: elapsed });
+    console.log(elapsed);
+    console.log(this.state.score);
+    this.endGame(elapsed);
+  };
+
+  endGame = (elapsed) => {
+    if (this.state.gameStatus === 'You win!') {
+      const { width, height, mines } = this.props;
+      const score = generateScore(elapsed, width, height, mines);
+      this.setState({
+        score: score,
+        gameStatus: `You win! Score is: ${score}`,
+      });
+    }
+  };
+
   render() {
     return (
       <div className='game'>
-        <InfoBar status={this.state.gameStatus} playing={this.state.playing} />
+        <InfoBar
+          status={this.state.gameStatus}
+          playing={this.state.playing}
+          updateTime={this.updateTimeUsed}
+        />
         <div className='main-content'>
           {renderBoard(
             this.state.board,
