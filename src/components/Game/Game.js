@@ -4,18 +4,11 @@ import { renderBoard } from '../../actions/renderBoard';
 import { checkWin } from '../../actions/checkWin';
 import PropTypes from 'prop-types';
 
-import './Board.css';
-export default class Board extends Component {
+import './Game.css';
+import InfoBar from '../InfoBar/InfoBar';
+export default class Game extends Component {
   constructor(props) {
     super(props);
-
-    // Board[x][y] object contains the following data members:
-    // int x,
-    // int y,
-    // int neighborCount
-    // bool isMine,
-    // bool isFlagged,
-    // bool isVisible,
 
     this.state = {
       board: initBoard(this.props.height, this.props.width, this.props.mines),
@@ -27,7 +20,7 @@ export default class Board extends Component {
   }
 
   componentDidMount() {
-    const { gameStatus, mines, board } = this.state;
+    const { gameStatus, mines } = this.state;
     if (!gameStatus) {
       this.setState({ gameStatus: `Mines remaining: ${mines}` });
     }
@@ -75,7 +68,7 @@ export default class Board extends Component {
     event.preventDefault();
     let updatedBoard = this.state.board;
     const { isFlagged, isVisible } = this.state.board[y][x];
-    let { mines, board } = this.state;
+    let { mines } = this.state;
     if (!isVisible) {
       //Only place flags if there are more to place:
       if (!updatedBoard[y][x].isFlagged) {
@@ -102,15 +95,15 @@ export default class Board extends Component {
 
   render() {
     return (
-      <div className='board'>
-        <div className='game-info'>
-          <span className='info'>{this.state.gameStatus}</span>
+      <div className='game'>
+        <InfoBar status={this.state.gameStatus} playing={this.state.playing} />
+        <div className='main-content'>
+          {renderBoard(
+            this.state.board,
+            this.leftClickHandler,
+            this.rightClickHandler
+          )}
         </div>
-        {renderBoard(
-          this.state.board,
-          this.leftClickHandler,
-          this.rightClickHandler
-        )}
       </div>
     );
   }

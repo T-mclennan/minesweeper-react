@@ -1,13 +1,11 @@
 import React from 'react';
-import { Header } from './components/Header';
-import Board from './components/Board/Board';
+import Board from './components/Game/Game';
 
 import './stylesheets/App.css';
 
 function App() {
   return (
     <div className='App'>
-      {/* <Header /> */}
       <Board width={30} height={12} mines={5} />
     </div>
   );

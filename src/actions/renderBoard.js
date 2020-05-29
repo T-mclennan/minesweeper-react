@@ -1,5 +1,4 @@
 import React from 'react';
-
 import Cell from '../components/Cell/Cell';
 
 export const renderBoard = (data, leftClickHandler, rightClickHandler) => {
@@ -49,5 +48,4 @@ const boardStyle = {
   borderRadius: '1rem',
   backgroundColor: '#faf2f2',
   maxWidth: '100rem',
-  dropShadow: '',
 };
