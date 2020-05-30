@@ -7,7 +7,7 @@ import './InfoBar.css';
 const infoBar = (props) => {
   return (
     <div style={barStyle}>
-      <h5 className='game-status'>{props.status.padEnd(26)}</h5>
+      <h5 className='game-status'>{props.status}</h5>
       <Button
         variant='outlined'
         style={props.playing ? invisibleButton : HomeButton}
@@ -28,7 +28,7 @@ const infoBar = (props) => {
 const barStyle = {
   padding: '1rem',
   display: 'flex',
-  backgroundColor: 'black',
+  backgroundColor: '#0e2754',
   flexDirection: 'row',
   justifyContent: 'space-between',
   alignContent: 'center',
@@ -36,14 +36,13 @@ const barStyle = {
 
 const invisibleButton = {
   display: 'none',
-  // margin: '0.5rem',
 };
 
 const ButtonStyle = {
   color: 'white',
   fontSize: '1rem',
   height: '3.2rem',
-  width: '12rem',
+  width: '10rem',
   fontWeight: 'bold',
   borderColor: 'white',
   borderRadius: '1rem',

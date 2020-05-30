@@ -3,7 +3,11 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: rgb(35, 66, 122);
+  /* background-color: rgb(35, 66, 122); */
+  background: #ff5f6d; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #ffc371, #ff5f6d);
+  background: linear-gradient(to right, #ffc371, #ff5f6d);
+
   height: 100%;
   width: 100%;
   margin: 0;

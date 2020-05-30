@@ -33,7 +33,7 @@ const Cell = (props) => {
       content = (
         <img
           style={{
-            marginLeft: '0.2rem',
+            // marginLeft: '0.2rem',
             width: '1.6rem',
             height: '1.6rem',
           }}
@@ -122,6 +122,11 @@ const coveredStyle = {
   borderWidth: '1px',
   borderColor: 'rgb(138, 151, 163)',
   borderStyle: 'outset',
+  // border: '1px solid black',
+  boxShadow: 'inset 2px 0px 3px 1px red',
+  boxShadow: 'inset 0px 2px 3px 1px white',
+
+  // boxSizing: 'border-box',
 };
 
 const seenCell = {

@@ -3,7 +3,7 @@ import Cell from '../components/Cell/Cell';
 
 export const renderBoard = (data, leftClickHandler, rightClickHandler) => {
   return (
-    <div style={boardStyle}>
+    <div style={{ ...boardStyle, ...noRightClick }}>
       <div style={colStyle}>
         {data.map((row, i) => {
           return (
@@ -48,4 +48,19 @@ const boardStyle = {
   borderRadius: '1rem',
   backgroundColor: '#faf2f2',
   maxWidth: '100rem',
+  borderWidth: '2px',
+  borderColor: 'lightgray',
+  borderStyle: 'double',
+  transition: '0.7s all ease-in',
+  // border: '1px solid black',
+  // boxShadow: 'inset 2px 0px 3px 1px red',
+  // boxShadow: 'inset 0px 2px 3px 1px white',
+};
+
+const noRightClick = {
+  webkitUserSelect: 'none',
+  mozUserSelect: 'none',
+  msUserSelect: 'none',
+  oUserSelect: 'none',
+  userSelect: 'none',
 };
