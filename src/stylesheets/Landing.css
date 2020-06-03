@@ -1,0 +1,47 @@
+h1,
+h2,
+h3 {
+  font-variant: small-caps;
+  font-size: 4rem;
+  letter-spacing: 0.3rem;
+  font-weight: 800;
+  text-align: center;
+  -webkit-background-clip: text;
+}
+
+h1,
+h3 {
+  color: rgb(255, 255, 255);
+  background-image: linear-gradient(
+    rgb(255, 255, 255) 46%,
+    rgb(125, 142, 167) 49%,
+    rgb(211, 226, 249) 80%
+  );
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 1px rgb(0, 0, 0);
+}
+
+h2,
+h3::before {
+  background: -webkit-linear-gradient(
+    -86deg,
+    /* #eef85b 5%,
+    #7aec8d 53%,
+    #09e5c3 91% */
+      /* #d6690a 15%,
+    #ffc165 53%,
+    #eb2858 91% */ #f8c270 15%,
+    #f8c270 53%,
+    #f19a56 91%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-stroke: 4px transparent;
+  color: #181616;
+  /* color: white */
+}
+
+h3::before {
+  content: attr(data-text);
+  position: absolute;
+  z-index: -1;
+}
