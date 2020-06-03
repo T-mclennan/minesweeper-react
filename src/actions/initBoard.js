@@ -128,11 +128,33 @@ const getNeighbors = (board, x, y) => {
   return neighbors;
 };
 
+export const extraBoardClear = (board, x, y) => {
+  let updatedBoard = board;
+  const neighbors = getNeighbors(updatedBoard, x, y);
+  const flaggedNeighbors = neighbors.filter((cell) => {
+    return cell.isFlagged;
+  });
+
+  const coveredNeighbors = neighbors.filter((cell) => {
+    return !cell.isVisible && !cell.isFlagged;
+  });
+
+  if (flaggedNeighbors.length === board[y][x].neighborCount) {
+    coveredNeighbors.forEach((cell) => {
+      console.log(cell);
+      updatedBoard = revealCells(updatedBoard, cell.x, cell.y);
+    });
+  }
+  return updatedBoard;
+};
+
 export const showBoard = (board) => {
   let updatedBoard = board;
   for (let y = 0; y < board.length; y++) {
     for (let x = 0; x < board[0].length; x++) {
-      board[y][x].isVisible = true;
+      if (!board[y][x].isFlagged) {
+        board[y][x].isVisible = true;
+      }
     }
   }
   return updatedBoard;

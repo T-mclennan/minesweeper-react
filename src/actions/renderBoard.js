@@ -1,7 +1,12 @@
 import React from 'react';
 import Cell from '../components/Cell/Cell';
 
-export const renderBoard = (data, leftClickHandler, rightClickHandler) => {
+export const renderBoard = (
+  data,
+  leftClickHandler,
+  rightClickHandler,
+  doubleClickHandler
+) => {
   return (
     <div style={{ ...boardStyle, ...noRightClick }}>
       <div style={colStyle}>
@@ -17,6 +22,7 @@ export const renderBoard = (data, leftClickHandler, rightClickHandler) => {
                       leftClickHandler(item.x, item.y, finalClick)
                     }
                     rightClick={(e) => rightClickHandler(e, item.x, item.y)}
+                    doubleClick={(e) => doubleClickHandler(e, item.x, item.y)}
                   />
                 );
               })}
@@ -58,9 +64,9 @@ const boardStyle = {
 };
 
 const noRightClick = {
-  webkitUserSelect: 'none',
-  mozUserSelect: 'none',
-  msUserSelect: 'none',
-  oUserSelect: 'none',
-  userSelect: 'none',
+  WebkitUserSelect: 'none',
+  MozUserSelect: 'none',
+  MsUserSelect: 'none',
+  OUserSelect: 'none',
+  UserSelect: 'none',
 };

@@ -98,6 +98,7 @@ const Cell = (props) => {
       style={{ ...cellStyle, ...dynamicStyling }}
       onClick={() => props.leftClick(finalClick)}
       onContextMenu={(e) => props.rightClick(e)}
+      onDoubleClick={(e) => props.doubleClick(e)}
     >
       {generateContent()}
     </div>

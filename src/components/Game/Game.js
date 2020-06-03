@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
-import { initBoard, revealCells, showBoard } from '../../actions/initBoard';
+import {
+  initBoard,
+  revealCells,
+  showBoard,
+  extraBoardClear,
+} from '../../actions/initBoard';
 import { renderBoard } from '../../actions/renderBoard';
 import { checkWin, generateScore } from '../../actions/checkWin';
 import PropTypes from 'prop-types';
@@ -95,6 +100,20 @@ export default class Game extends Component {
     this.checkForWin(updatedBoard);
   };
 
+  doubleClickHandler = (event, x, y) => {
+    event.preventDefault();
+    console.log('Double click', x, y);
+    let { board } = this.state;
+    console.log(board[y][x].isVisible);
+    console.log(!board[y][x].isFlagged);
+
+    if (board[y][x].isVisible && !board[y][x].isFlagged) {
+      board = extraBoardClear(board, x, y);
+    }
+
+    this.setState({ board: board });
+  };
+
   updateTimeUsed = (elapsed) => {
     this.setState({ score: elapsed });
     console.log(elapsed);
@@ -125,7 +144,8 @@ export default class Game extends Component {
           {renderBoard(
             this.state.board,
             this.leftClickHandler,
-            this.rightClickHandler
+            this.rightClickHandler,
+            this.doubleClickHandler
           )}
         </div>
       </div>
