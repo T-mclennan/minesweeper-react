@@ -22,26 +22,45 @@ h3 {
 }
 
 h2,
-h3::before {
+h3 {
   background: -webkit-linear-gradient(
-    -86deg,
+    90deg,
     /* #eef85b 5%,
     #7aec8d 53%,
     #09e5c3 91% */
       /* #d6690a 15%,
     #ffc165 53%,
-    #eb2858 91% */ #f8c270 15%,
-    #f8c270 53%,
-    #f19a56 91%
+    #eb2858 91% */ #f9c271 15%,
+    #aaddff 53%,
+    hsl(204, 100%, 60%) 53%,
+    #5aa1ff 91%,
+    #0e1a49
   );
   -webkit-background-clip: text;
   -webkit-text-stroke: 4px transparent;
-  color: #181616;
+  color: #132257;
   /* color: white */
+}
+
+h4 {
+  margin: 0;
+  font-size: 1rem;
+  letter-spacing: 0.1rem;
+  color: #f5d6a8;
 }
 
 h3::before {
   content: attr(data-text);
   position: absolute;
   z-index: -1;
+}
+
+.icon {
+  color: #0e1a49;
+}
+
+.button,
+.icon:hover {
+  color: #d41b53;
+  -webkit-text-stroke: 1px whitesmoke;
 }
