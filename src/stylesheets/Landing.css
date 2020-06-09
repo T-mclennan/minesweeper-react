@@ -1,28 +1,76 @@
-h1,
-h2,
-h3 {
+/* h1, */
+h2
+/* h3  */ {
   font-variant: small-caps;
   font-size: 4rem;
   letter-spacing: 0.3rem;
   font-weight: 800;
   text-align: center;
-  -webkit-background-clip: text;
-}
-
-h1,
-h3 {
-  color: rgb(255, 255, 255);
-  background-image: linear-gradient(
-    rgb(255, 255, 255) 46%,
-    rgb(125, 142, 167) 49%,
-    rgb(211, 226, 249) 80%
+  background: -webkit-linear-gradient(
+    90deg,
+    #f9c271 15%,
+    #aaddff 53%,
+    hsl(204, 100%, 60%) 53%,
+    #5aa1ff 91%
   );
-  -webkit-text-fill-color: transparent;
-  -webkit-text-stroke: 1px rgb(0, 0, 0);
+  -webkit-background-clip: text;
+  -webkit-text-stroke: 4px transparent;
+  color: #132257;
+  /* color: white */
 }
 
-h2,
-h3 {
+/* @-webkit-keyframes fontgradient {
+  0% {
+    background-position: 0% 92%;
+  }
+  50% {
+    background-position: 100% 9%;
+  }
+  100% {
+    background-position: 0% 92%;
+  }
+}
+@-moz-keyframes fontgradient {
+  0% {
+    background-position: 0% 92%;
+  }
+  50% {
+    background-position: 100% 9%;
+  }
+  100% {
+    background-position: 0% 92%;
+  }
+}
+@keyframes fontgradient {
+  0% {
+    background-position: 0% 92%;
+  }
+  50% {
+    background-position: 100% 9%;
+  }
+  100% {
+    background-position: 0% 92%;
+  }
+} */
+
+h4 {
+  margin: 0;
+  font-size: 1rem;
+  letter-spacing: 0.1rem;
+  /* color: #f5d6a8; */
+}
+
+/* h4:hover {
+  color: whitesmoke !important;
+} */
+
+/* h3::before {
+  content: attr(data-text);
+  position: absolute;
+  z-index: -1;
+} */
+
+.fa-gradient {
   background: -webkit-linear-gradient(
     90deg,
     /* #eef85b 5%,
@@ -33,34 +81,36 @@ h3 {
     #eb2858 91% */ #f9c271 15%,
     #aaddff 53%,
     hsl(204, 100%, 60%) 53%,
-    #5aa1ff 91%,
-    #0e1a49
+    #5aa1ff 91%
   );
   -webkit-background-clip: text;
-  -webkit-text-stroke: 4px transparent;
-  color: #132257;
-  /* color: white */
-}
-
-h4 {
-  margin: 0;
-  font-size: 1rem;
-  letter-spacing: 0.1rem;
-  color: #f5d6a8;
-}
-
-h3::before {
-  content: attr(data-text);
-  position: absolute;
-  z-index: -1;
+  -webkit-text-fill-color: transparent;
 }
 
 .icon {
   color: #0e1a49;
+  stroke: #f5ddb9;
+  stroke-width: 8;
 }
 
-.button,
 .icon:hover {
   color: #d41b53;
-  -webkit-text-stroke: 1px whitesmoke;
+}
+
+button:hover {
+  /* font-size: 5rem; */
+  /* -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important; */
+  border-color: whitesmoke !important;
+  color: whitesmoke !important;
+  background: -webkit-linear-gradient(
+    240deg,
+    rgb(218, 28, 139),
+    rgba(245, 3, 104, 0.612),
+    rgb(248, 9, 69)
+  );
+  animation: 2s ease 0s infinite normal none running fontgradient;
+  -webkit-animation: fontgradient 2s ease infinite;
+  -moz-animation: fontgradient 2s ease infinite;
+  animation: fontgradient 2s ease infinite;
 }

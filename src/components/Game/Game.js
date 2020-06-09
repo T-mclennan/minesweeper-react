@@ -17,8 +17,12 @@ export default class Game extends Component {
     super(props);
 
     this.state = {
-      board: initBoard(this.props.height, this.props.width, this.props.mines),
-      mines: this.props.mines,
+      board: initBoard(
+        this.props.match.params.height,
+        this.props.match.params.width,
+        this.props.match.params.mines
+      ),
+      mines: this.props.match.params.mines,
       gameStatus: '',
       playing: true,
       finalCell: {},

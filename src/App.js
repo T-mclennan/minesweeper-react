@@ -1,28 +1,27 @@
 import React from 'react';
-import Board from './components/Game/Game';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import Game from './components/Game/Game';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 import Landing from './pages/Landing';
+import Scoreboard from './pages/Scoreboard';
 import './stylesheets/App.css';
 
 function App() {
   return (
     <div className='App'>
-      {/* <Board width={30} height={18} mines={15} /> */}
       <Router>
         <Route exact path='/'>
           <Landing />
         </Route>
-      </Router>
-      {/* <Route exact path="/Play">
-          <Board />
-      </Route>
-      <Route exact path="/Scores">
+        <Route exact path='/Play/:width/:height/:mines'>
+          <Game />
+        </Route>
+        <Route exact path='/Scores'>
           <Scoreboard />
-      </Route>
+        </Route>
+      </Router>
 
-
-      <Route path='/*' component={FourOFour} /> */}
+      {/* <Route path='/*' component={FourOFour} /> */}
     </div>
   );
 }
