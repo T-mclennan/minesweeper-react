@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Clock from '../Clock/Clock';
 import Button from '@material-ui/core/Button';
 import './InfoBar.css';
+import history from '../../history';
 
 const infoBar = (props) => {
   return (
@@ -11,6 +12,9 @@ const infoBar = (props) => {
       <Button
         variant='outlined'
         style={props.playing ? invisibleButton : HomeButton}
+        onClick={() => {
+          history.push('/');
+        }}
       >
         Main Menu
       </Button>

@@ -8,6 +8,7 @@ import {
   faGithub,
 } from '@fortawesome/free-brands-svg-icons';
 import { faListAlt } from '@fortawesome/free-regular-svg-icons';
+import history from '../history';
 import '../stylesheets/Landing.css';
 
 const Landing = () => {
@@ -65,6 +66,12 @@ const Landing = () => {
     }
   };
 
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    console.log('submit handler');
+    history.push(`/play/${width}/${height}/${mines}`);
+  };
+
   return (
     <div className='mainContainer' style={Styling}>
       <div style={TitleContainer}>
@@ -77,10 +84,7 @@ const Landing = () => {
         <h2>Covid Sweeper</h2>
       </div>
       <div style={FormContainer}>
-        <form
-          //  onSubmit={this.onSubmit}
-          style={Form}
-        >
+        <form onSubmit={onSubmitHandler} style={Form}>
           <FormGroup style={InputRow}>
             <Label for='difficulty' sm={2} style={LabelStyle}>
               Difficulty:

@@ -137,6 +137,7 @@ export default class Game extends Component {
   };
 
   render() {
+    console.log(this.props.match);
     return (
       <div className='game'>
         <InfoBar

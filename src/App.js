@@ -1,7 +1,9 @@
 import React from 'react';
 import Game from './components/Game/Game';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { Router } from 'react-router';
+import { Route, Link } from 'react-router-dom';
 
+import history from './history';
 import Landing from './pages/Landing';
 import Scoreboard from './pages/Scoreboard';
 import './stylesheets/App.css';
@@ -9,14 +11,16 @@ import './stylesheets/App.css';
 function App() {
   return (
     <div className='App'>
-      <Router>
+      <Router history={history}>
         <Route exact path='/'>
           <Landing />
         </Route>
-        <Route exact path='/Play/:width/:height/:mines'>
-          <Game />
-        </Route>
-        <Route exact path='/Scores'>
+        <Route
+          exact
+          path='/play/:width/:height/:mines'
+          render={(props) => <Game {...props} />}
+        />
+        <Route exact path='/scores'>
           <Scoreboard />
         </Route>
       </Router>
