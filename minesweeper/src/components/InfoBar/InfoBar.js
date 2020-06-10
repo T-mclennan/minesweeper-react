@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Clock from '../Clock/Clock';
 import Button from '@material-ui/core/Button';
+import refreshGame from '../Game/Game';
 import './InfoBar.css';
 import history from '../../history';
 
