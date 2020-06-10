@@ -14,6 +14,7 @@ export const checkWin = (board) => {
 };
 
 export const generateScore = (elapsed, width, height, mines) => {
+  console.log(`width: ${width} height: ${height} mines: ${mines}`);
   const mineCoefficient = mines / (width * height);
   const upperBound = 6000 * mines * (1 + (mineCoefficient - 0.1));
   // const mineCoefficient = mines / (width * height);

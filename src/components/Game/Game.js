@@ -16,13 +16,12 @@ export default class Game extends Component {
   constructor(props) {
     super(props);
 
+    const { height, width, mines } = this.props.match.params;
     this.state = {
-      board: initBoard(
-        this.props.match.params.height,
-        this.props.match.params.width,
-        this.props.match.params.mines
-      ),
-      mines: this.props.match.params.mines,
+      width: width,
+      height: height,
+      board: initBoard(height, width, mines),
+      mines: mines,
       gameStatus: '',
       playing: true,
       finalCell: {},
@@ -127,7 +126,8 @@ export default class Game extends Component {
 
   endGame = (elapsed) => {
     if (this.state.gameStatus === 'You win!') {
-      const { width, height, mines } = this.props;
+      const { width, height } = this.state;
+      const { mines } = this.props.match.params;
       const score = generateScore(elapsed, width, height, mines);
       this.setState({
         score: score,
@@ -137,7 +137,6 @@ export default class Game extends Component {
   };
 
   render() {
-    console.log(this.props.match);
     return (
       <div className='game'>
         <InfoBar
