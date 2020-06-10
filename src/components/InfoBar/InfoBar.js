@@ -21,6 +21,9 @@ const infoBar = (props) => {
       <Button
         variant='outlined'
         style={props.playing ? invisibleButton : ReplayButton}
+        onClick={() => {
+          history.go();
+        }}
       >
         Play Again?
       </Button>

@@ -105,22 +105,18 @@ export default class Game extends Component {
 
   doubleClickHandler = (event, x, y) => {
     event.preventDefault();
-    console.log('Double click', x, y);
     let { board } = this.state;
-    console.log(board[y][x].isVisible);
-    console.log(!board[y][x].isFlagged);
 
     if (board[y][x].isVisible && !board[y][x].isFlagged) {
       board = extraBoardClear(board, x, y);
     }
 
     this.setState({ board: board });
+    this.checkForWin(board);
   };
 
   updateTimeUsed = (elapsed) => {
     this.setState({ score: elapsed });
-    console.log(elapsed);
-    console.log(this.state.score);
     this.endGame(elapsed);
   };
 
