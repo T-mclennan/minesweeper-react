@@ -1,12 +1,7 @@
 import React from 'react';
 import Cell from '../components/Cell/Cell';
 
-export const renderBoard = (
-  data,
-  leftClickHandler,
-  rightClickHandler,
-  doubleClickHandler
-) => {
+export const renderBoard = (data) => {
   return (
     <div style={{ ...boardStyle, ...noRightClick }}>
       <div style={colStyle}>
@@ -14,17 +9,7 @@ export const renderBoard = (
           return (
             <div key={i} style={rowStyle}>
               {row.map((item) => {
-                return (
-                  <Cell
-                    key={item.x * row.length + item.y}
-                    data={item}
-                    leftClick={(finalClick) =>
-                      leftClickHandler(item.x, item.y, finalClick)
-                    }
-                    rightClick={(e) => rightClickHandler(e, item.x, item.y)}
-                    doubleClick={(e) => doubleClickHandler(e, item.x, item.y)}
-                  />
-                );
+                return <Cell key={item.x * row.length + item.y} data={item} />;
               })}
             </div>
           );

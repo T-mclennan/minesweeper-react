@@ -8,20 +8,24 @@ import flag from '../../assets/flags/red-flag.png';
 import './Cell.css';
 
 const Cell = (props) => {
-  const [lastCell, setLastCell] = useState(false);
+  // const [lastCell, setLastCell] = useState(false);
   const gameState = useContext(GameContext);
 
   const {
     rightClickHandler,
     leftClickHandler,
     doubleClickHandler,
-    playing,
+    finalCell,
   } = gameState;
   const { isMine, isFlagged, isVisible, neighborCount, x, y } = props.data;
 
-  const finalClick = () => {
-    setLastCell(true);
-  };
+  // const finalClick = () => {
+  //   setLastCell(true);
+  // };
+
+  // const notFinalClick = () => {
+  //   setLastCell(false);
+  // };
 
   const generateContent = () => {
     let content = null;
@@ -37,7 +41,8 @@ const Cell = (props) => {
         />
       );
     } else if (isMine && isVisible) {
-      const mineVersion = lastCell ? foundCorona : corona;
+      const mineVersion =
+        finalCell.x === x && finalCell.y === y ? foundCorona : corona;
       content = (
         <img
           style={{
@@ -50,6 +55,7 @@ const Cell = (props) => {
     } else if (neighborCount > 0) {
       content = <h5 style={{ margin: 'auto' }}>{neighborCount}</h5>;
     }
+
     return content;
   };
 
@@ -81,7 +87,7 @@ const Cell = (props) => {
 
     if (isFlagged) {
       return { ...coveredStyle, color: 'red', fontSize: '1.8rem' };
-    } else if (lastCell && !playing) {
+    } else if (finalCell.x === x && finalCell.y === y && !gameState.playing) {
       return {
         ...seenCell,
         backgroundColor: 'rgb(252, 214, 210)',
@@ -101,7 +107,7 @@ const Cell = (props) => {
   return (
     <div
       style={{ ...cellStyle, ...dynamicStyling }}
-      onClick={() => leftClickHandler(x, y, finalClick)}
+      onClick={() => leftClickHandler(x, y)}
       onContextMenu={(e) => rightClickHandler(e, x, y)}
       onDoubleClick={(e) => doubleClickHandler(e, x, y)}
     >

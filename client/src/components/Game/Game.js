@@ -48,7 +48,7 @@ export default class Game extends Component {
     const { height, width, mines } = this.state;
     this.setState({
       board: initBoard(height, width, mines),
-      gameStatus: '',
+      gameStatus: `Mines remaining: ${mines}`,
       playing: true,
       finalCell: {},
       score: 0,
@@ -63,7 +63,7 @@ export default class Game extends Component {
       if (isVisible || isFlagged) return null;
 
       if (isMine) {
-        finalClick();
+        // finalClick();
         this.setState({
           gameStatus: 'Game over, you lost!',
           playing: false,
@@ -143,9 +143,10 @@ export default class Game extends Component {
   };
 
   render() {
-    const { board, gameStatus, playing } = this.state;
+    const { board, gameStatus, playing, finalCell } = this.state;
     const gameState = {
-      state: this.state,
+      finalCell: finalCell,
+      playing: playing,
       leftClickHandler: this.leftClickHandler,
       rightClickHandler: this.rightClickHandler,
       doubleClickHandler: this.doubleClickHandler,
@@ -161,14 +162,7 @@ export default class Game extends Component {
           resetGame={this.resetGame}
         />
         <GameProvider value={gameState}>
-          <div className='main-content'>
-            {renderBoard(
-              board,
-              this.leftClickHandler,
-              this.rightClickHandler,
-              this.doubleClickHandler
-            )}
-          </div>
+          <div className='main-content'>{renderBoard(board)}</div>
         </GameProvider>
       </div>
     );
