@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Clock from '../Clock/Clock';
-import Button from '@material-ui/core/Button';
+import { Button } from 'reactstrap';
 import refreshGame from '../Game/Game';
 import './InfoBar.css';
 import history from '../../history';
@@ -23,7 +23,7 @@ const infoBar = (props) => {
         variant='outlined'
         style={props.playing ? invisibleButton : ReplayButton}
         onClick={() => {
-          history.go();
+          props.resetGame();
         }}
       >
         Play Again?

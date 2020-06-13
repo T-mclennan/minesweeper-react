@@ -7,8 +7,7 @@ import {
 } from '../../actions/initBoard';
 import { renderBoard } from '../../actions/renderBoard';
 import { checkWin, generateScore } from '../../actions/checkWin';
-import PropTypes from 'prop-types';
-
+import { GameProvider } from './GameContext';
 import InfoBar from '../InfoBar/InfoBar';
 import './Game.css';
 
@@ -43,6 +42,17 @@ export default class Game extends Component {
         playing: false,
       });
     }
+  };
+
+  resetGame = () => {
+    const { height, width, mines } = this.state;
+    this.setState({
+      board: initBoard(height, width, mines),
+      gameStatus: '',
+      playing: true,
+      finalCell: {},
+      score: 0,
+    });
   };
 
   leftClickHandler = (x, y, finalClick) => {
@@ -133,28 +143,34 @@ export default class Game extends Component {
   };
 
   render() {
+    const { board, gameStatus, playing } = this.state;
+    const gameState = {
+      state: this.state,
+      leftClickHandler: this.leftClickHandler,
+      rightClickHandler: this.rightClickHandler,
+      doubleClickHandler: this.doubleClickHandler,
+    };
+
     return (
+      //Add context API here:
       <div className='game'>
         <InfoBar
-          status={this.state.gameStatus}
-          playing={this.state.playing}
+          status={gameStatus}
+          playing={playing}
           updateTime={this.updateTimeUsed}
+          resetGame={this.resetGame}
         />
-        <div className='main-content'>
-          {renderBoard(
-            this.state.board,
-            this.leftClickHandler,
-            this.rightClickHandler,
-            this.doubleClickHandler
-          )}
-        </div>
+        <GameProvider value={gameState}>
+          <div className='main-content'>
+            {renderBoard(
+              board,
+              this.leftClickHandler,
+              this.rightClickHandler,
+              this.doubleClickHandler
+            )}
+          </div>
+        </GameProvider>
       </div>
     );
   }
-
-  static propTypes = {
-    height: PropTypes.number,
-    width: PropTypes.number,
-    mines: PropTypes.number,
-  };
 }

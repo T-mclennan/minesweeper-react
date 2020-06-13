@@ -1,26 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 
+import GameContext from '../Game/GameContext';
 import corona from '../../assets/mines/purple-mine.png';
 import foundCorona from '../../assets/mines/red-mine.png';
 import flag from '../../assets/flags/red-flag.png';
 import './Cell.css';
 
 const Cell = (props) => {
-  const { isMine, isFlagged, isVisible, neighborCount } = props.data;
-
   const [lastCell, setLastCell] = useState(false);
+  const gameState = useContext(GameContext);
+
+  const {
+    rightClickHandler,
+    leftClickHandler,
+    doubleClickHandler,
+    playing,
+  } = gameState;
+  const { isMine, isFlagged, isVisible, neighborCount, x, y } = props.data;
 
   const finalClick = () => {
     setLastCell(true);
   };
+
   const generateContent = () => {
     let content = null;
     if (isFlagged) {
       content = (
         <img
           style={{
-            marginLeft: '0.2rem',
             width: '1.1rem',
             height: '1.1rem',
           }}
@@ -33,8 +41,6 @@ const Cell = (props) => {
       content = (
         <img
           style={{
-            // marginLeft: '0.2rem',
-            width: '1.6rem',
             height: '1.6rem',
           }}
           src={mineVersion}
@@ -42,7 +48,7 @@ const Cell = (props) => {
         />
       );
     } else if (neighborCount > 0) {
-      content = <h5>{neighborCount}</h5>;
+      content = <h5 style={{ margin: 'auto' }}>{neighborCount}</h5>;
     }
     return content;
   };
@@ -75,12 +81,11 @@ const Cell = (props) => {
 
     if (isFlagged) {
       return { ...coveredStyle, color: 'red', fontSize: '1.8rem' };
-    } else if (lastCell) {
+    } else if (lastCell && !playing) {
       return {
         ...seenCell,
         backgroundColor: 'rgb(252, 214, 210)',
-
-        border: '1px ridge red',
+        border: '2px ridge red',
       };
     } else if (isVisible && neighborCount > 0) {
       return { ...seenCell, color: generateColor(neighborCount) };
@@ -96,9 +101,9 @@ const Cell = (props) => {
   return (
     <div
       style={{ ...cellStyle, ...dynamicStyling }}
-      onClick={() => props.leftClick(finalClick)}
-      onContextMenu={(e) => props.rightClick(e)}
-      onDoubleClick={(e) => props.doubleClick(e)}
+      onClick={() => leftClickHandler(x, y, finalClick)}
+      onContextMenu={(e) => rightClickHandler(e, x, y)}
+      onDoubleClick={(e) => doubleClickHandler(e, x, y)}
     >
       {generateContent()}
     </div>
