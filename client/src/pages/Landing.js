@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { Button, Input, Label, FormGroup, Col } from 'reactstrap';
-import VirusLogo from '../assets/icons/viruses-solid.svg';
+// import VirusLogo from '../assets/icons/viruses-solid.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faGithubAlt,
   faGithubSquare,
   faGithub,
 } from '@fortawesome/free-brands-svg-icons';
+import { faViruses } from '@fortawesome/free-solid-svg-icons';
 import { faListAlt } from '@fortawesome/free-regular-svg-icons';
 import history from '../history';
 import '../stylesheets/Landing.css';
@@ -75,12 +76,12 @@ const Landing = () => {
   return (
     <div className='mainContainer' style={Styling}>
       <div style={TitleContainer}>
-        <img
-          src={VirusLogo}
-          className='icon'
-          style={{ width: '3rem', margin: '1rem' }}
-          alt='Virus Logo'
+        <FontAwesomeIcon
+          icon={faViruses}
+          // style={Icon}
+          className='virus-icon far fa-2x fa-in'
         />
+
         <h2>Covid Sweeper</h2>
       </div>
       <div style={FormContainer}>
@@ -166,21 +167,21 @@ const Landing = () => {
           <a href={'https://www.github.com/T-mclennan'}>
             <FontAwesomeIcon
               icon={faListAlt}
-              style={Icon}
+              // style={Icon}
               className='icon far fa-2x fa-in'
             />
           </a>
           <a href={'https://www.github.com/T-mclennan'}>
             <FontAwesomeIcon
               icon={faGithubAlt}
-              style={Icon}
+              // style={Icon}
               className='icon far fa-2x fa-i'
             />
           </a>
           <a href={'https://www.github.com/T-mclennan'}>
             <FontAwesomeIcon
               icon={faGithubSquare}
-              style={Icon}
+              // style={Icon}
               className='icon far fa-2x fa-in'
             />
           </a>
@@ -207,12 +208,8 @@ const TitleContainer = {
   display: 'flex',
   flexDirection: 'row',
   justifyContent: 'center',
+  alignContent: 'center',
   paddingRight: '3rem',
-};
-
-const Title = {
-  // color: 'white',
-  // fontSize: '3rem',
 };
 
 const FormContainer = {
@@ -229,7 +226,6 @@ const Form = {
   justifyContent: 'center',
   alignContent: 'center',
   width: '30rem',
-  // height: '20rem',
   backgroundColor: 'hsl(204, 100%, 60%) 53%',
   border: '1px double #ffd79c',
   borderRadius: '1rem',
@@ -245,15 +241,12 @@ const InputStyle = {
   width: '15rem',
   border: '1px solid #0e1a49',
   borderRadius: '1rem',
-  // margin: 'auto',
-  // marginBottom: '1rem',
   marginLeft: '2rem',
 };
 
 const InputRow = {
   display: 'flex',
   flexDirection: 'row',
-  // justifyContent: 'space between',
   alignContent: 'center',
   width: '36.5rem',
   padding: '0 1rem',
@@ -276,7 +269,6 @@ const ButtonStyle = {
 };
 
 const FooterContainer = {
-  // flex: 1,
   display: 'flex',
   justifyContent: 'center',
   height: '5rem',
@@ -295,18 +287,8 @@ const Footer = {
   color: '#0e1a49',
 };
 
-const Icon = {
-  margin: '0 2rem',
-  // color: '#0e1a49',
-  // WebkitTextFillColor: 'white',
-  // WebkitTextStrokeWidth: '1px',
-  // WebkitTextStrokeColor: 'black',
-};
-
-// font awesome assets:
-
-{
-  /* <i class="fas fa-virus-slash"></i> */
-}
+// const Icon = {
+//   margin: '0 2rem',
+// };
 
 export default Landing;

@@ -36,7 +36,8 @@ const infoBar = (props) => {
 const barStyle = {
   padding: '0.3rem',
   display: 'flex',
-  backgroundColor: '#0e2754',
+  color: '#0e2754',
+  // backgroundColor: '#0e2754',
   flexDirection: 'row',
   justifyContent: 'space-between',
   alignContent: 'center',

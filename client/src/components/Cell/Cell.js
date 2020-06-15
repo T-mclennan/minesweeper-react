@@ -1,6 +1,4 @@
 import React, { useState, useContext } from 'react';
-import PropTypes from 'prop-types';
-
 import GameContext from '../Game/GameContext';
 import corona from '../../assets/mines/purple-mine.png';
 import foundCorona from '../../assets/mines/red-mine.png';
@@ -8,7 +6,6 @@ import flag from '../../assets/flags/red-flag.png';
 import './Cell.css';
 
 const Cell = (props) => {
-  // const [lastCell, setLastCell] = useState(false);
   const gameState = useContext(GameContext);
 
   const {
@@ -18,14 +15,6 @@ const Cell = (props) => {
     finalCell,
   } = gameState;
   const { isMine, isFlagged, isVisible, neighborCount, x, y } = props.data;
-
-  // const finalClick = () => {
-  //   setLastCell(true);
-  // };
-
-  // const notFinalClick = () => {
-  //   setLastCell(false);
-  // };
 
   const generateContent = () => {
     let content = null;
@@ -47,6 +36,7 @@ const Cell = (props) => {
         <img
           style={{
             height: '1.6rem',
+            // width: '1.6rem',
           }}
           src={mineVersion}
           alt={'mine'}
@@ -134,11 +124,8 @@ const coveredStyle = {
   borderWidth: '1px',
   borderColor: 'rgb(138, 151, 163)',
   borderStyle: 'outset',
-  // border: '1px solid black',
   boxShadow: 'inset 2px 0px 3px 1px red',
   boxShadow: 'inset 0px 2px 3px 1px white',
-
-  // boxSizing: 'border-box',
 };
 
 const seenCell = {
