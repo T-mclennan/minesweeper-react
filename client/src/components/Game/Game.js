@@ -5,10 +5,12 @@ import {
   showBoard,
   extraBoardClear,
 } from '../../actions/initBoard';
-import { renderBoard } from '../../actions/renderBoard';
+import Board from '../Board/Board';
 import { checkWin, generateScore } from '../../actions/checkWin';
 import { GameProvider } from './GameContext';
 import InfoBar from '../InfoBar/InfoBar';
+import UIfx from 'uifx';
+import boom from '../../assets/audio/explosion.mp3';
 import './Game.css';
 
 export default class Game extends Component {
@@ -16,6 +18,7 @@ export default class Game extends Component {
     super(props);
 
     const { height, width, mines } = this.props.match.params;
+
     this.state = {
       width: width,
       height: height,
@@ -23,8 +26,12 @@ export default class Game extends Component {
       mines: mines,
       gameStatus: '',
       playing: true,
+      firstClick: true,
       finalCell: {},
       score: 0,
+      sfx: new UIfx(boom, {
+        volume: 0.4,
+      }),
     };
   }
 
@@ -55,19 +62,20 @@ export default class Game extends Component {
     });
   };
 
-  leftClickHandler = (x, y, finalClick) => {
-    if (this.state.playing) {
+  leftClickHandler = (x, y) => {
+    const { playing, board, firstClick, sfx } = this.state;
+    if (playing) {
       const { isVisible, isFlagged, isMine } = this.state.board[y][x];
-      let updatedBoard = this.state.board;
+      let updatedBoard = board;
 
       if (isVisible || isFlagged) return null;
 
       if (isMine) {
-        // finalClick();
+        sfx.play();
         this.setState({
           gameStatus: 'Game over, you lost!',
           playing: false,
-          board: showBoard(this.state.board),
+          board: showBoard(board),
           finalCell: {
             x,
             y,
@@ -81,6 +89,10 @@ export default class Game extends Component {
       }
 
       this.checkForWin(updatedBoard);
+
+      if (firstClick) {
+        this.setState({ firstClick: false });
+      }
     }
   };
 
@@ -145,6 +157,7 @@ export default class Game extends Component {
   render() {
     const { board, gameStatus, playing, finalCell } = this.state;
     const gameState = {
+      gameStatus: gameStatus,
       finalCell: finalCell,
       playing: playing,
       leftClickHandler: this.leftClickHandler,
@@ -162,7 +175,10 @@ export default class Game extends Component {
           resetGame={this.resetGame}
         />
         <GameProvider value={gameState}>
-          <div className='main-content'>{renderBoard(board)}</div>
+          <div className='main-content'>
+            {/* {renderBoard(board)} */}
+            <Board board={board} over={gameStatus === 'Game over, you lost!'} />
+          </div>
         </GameProvider>
       </div>
     );

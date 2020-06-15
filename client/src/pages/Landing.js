@@ -287,8 +287,4 @@ const Footer = {
   color: '#0e1a49',
 };
 
-// const Icon = {
-//   margin: '0 2rem',
-// };
-
 export default Landing;

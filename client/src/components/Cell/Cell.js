@@ -36,7 +36,6 @@ const Cell = (props) => {
         <img
           style={{
             height: '1.6rem',
-            // width: '1.6rem',
           }}
           src={mineVersion}
           alt={'mine'}
@@ -80,8 +79,8 @@ const Cell = (props) => {
     } else if (finalCell.x === x && finalCell.y === y && !gameState.playing) {
       return {
         ...seenCell,
-        backgroundColor: 'rgb(252, 214, 210)',
-        border: '2px ridge red',
+        backgroundColor: 'rgb(242, 171, 163)',
+        border: '2px solid rgb(186, 34, 17)',
       };
     } else if (isVisible && neighborCount > 0) {
       return { ...seenCell, color: generateColor(neighborCount) };
@@ -116,6 +115,8 @@ const cellStyle = {
   justifyContent: 'center',
   flexDirection: 'column',
   textAlign: 'center',
+  // transitionProperty: 'all',
+  // transitionDuration: '0.02s',
 };
 
 const coveredStyle = {
@@ -134,7 +135,7 @@ const seenCell = {
 };
 
 const emptyCell = {
-  backgroundColor: '#faf2f2',
+  // backgroundColor: '#faf2f2',
   fontSize: '1.5rem',
   border: '1px dotted rgb(218, 218, 218)',
 };
