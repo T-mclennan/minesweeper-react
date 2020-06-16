@@ -8,7 +8,7 @@ const Board = ({ board, over }) => {
     ? {
         animation: 'x 0.3s',
         animationName: Radium.keyframes(tada, 'tada'),
-        borderColor: 'crimson',
+        borderColor: 'rgba(128,0,128, 0.6)',
         boxShadow: 'inset 0px 0px 0px 4px rgba(128,0,128, 0.2)',
       }
     : {};
