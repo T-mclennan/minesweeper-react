@@ -72,7 +72,7 @@ const Cell = (props) => {
   };
 
   const generateStyle = () => {
-    const { isVisible, neighborCount, isFlagged } = props.data;
+    const { isVisible, neighborCount, isFlagged, isRevealed } = props.data;
 
     if (isFlagged) {
       return { ...coveredStyle, color: 'red', fontSize: '1.8rem' };
@@ -82,6 +82,9 @@ const Cell = (props) => {
         backgroundColor: 'rgb(242, 171, 163)',
         border: '2px solid rgb(186, 34, 17)',
       };
+    } else if (isRevealed) {
+      console.log('is Revealed');
+      return { ...seenCell, backgroundColor: '#EADBD7 ' };
     } else if (isVisible && neighborCount > 0) {
       return { ...seenCell, color: generateColor(neighborCount) };
     } else if (isVisible && neighborCount === 0) {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { shake, tada } from 'react-animations';
+import { tada } from 'react-animations';
 import Radium, { StyleRoot } from 'radium';
 import Cell from '../Cell/Cell';
 
@@ -8,8 +8,8 @@ const Board = ({ board, over }) => {
     ? {
         animation: 'x 0.3s',
         animationName: Radium.keyframes(tada, 'tada'),
-        border: 'inset 2px red',
-        // backgroundColor: 'mistyrose',
+        borderColor: 'crimson',
+        boxShadow: 'inset 0px 0px 0px 4px rgba(128,0,128, 0.2)',
       }
     : {};
 

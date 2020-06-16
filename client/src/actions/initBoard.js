@@ -9,6 +9,7 @@ const generateBoard = (height, width) => {
         isMine: false,
         isFlagged: false,
         isVisible: false,
+        isRevealed: false,
         neighborCount: 0,
       };
     }
@@ -152,8 +153,9 @@ export const showBoard = (board) => {
   let updatedBoard = board;
   for (let y = 0; y < board.length; y++) {
     for (let x = 0; x < board[0].length; x++) {
-      if (!board[y][x].isFlagged) {
+      if (!board[y][x].isFlagged && !board[y][x].isVisible) {
         board[y][x].isVisible = true;
+        board[y][x].isRevealed = true;
       }
     }
   }
