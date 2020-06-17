@@ -84,7 +84,7 @@ const Cell = (props) => {
       };
     } else if (isRevealed) {
       console.log('is Revealed');
-      return { ...seenCell, backgroundColor: '#EADBD7 ' };
+      return { ...seenCell, backgroundColor: '#EADBD7' };
     } else if (isVisible && neighborCount > 0) {
       return { ...seenCell, color: generateColor(neighborCount) };
     } else if (isVisible && neighborCount === 0) {
