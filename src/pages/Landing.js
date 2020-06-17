@@ -164,7 +164,7 @@ const Landing = () => {
       </div>
       <div style={FooterContainer} className='footer'>
         <div style={Footer} className='content'>
-          <a href={'https://www.github.com/T-mclennan'}>
+          <a href={'/scores'}>
             <FontAwesomeIcon
               icon={faListAlt}
               // style={Icon}

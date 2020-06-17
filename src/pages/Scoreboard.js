@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Table } from 'reactstrap';
 import CountUp from 'react-countup';
+import history from '../history';
 import '../stylesheets/Scoreboard.css';
 
 const Scoreboard = () => {
@@ -49,8 +50,12 @@ const Scoreboard = () => {
     });
   };
 
+  const handleClick = () => {
+    history.push('/');
+  };
+
   return (
-    <div className='standings-page'>
+    <div className='standings-page' onClick={() => handleClick()}>
       <h2 className='header'>Top Players:</h2>
       <div style={outerScoreContainer}>
         <div style={innerScoreContainer}>
