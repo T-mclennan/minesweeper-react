@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Table } from 'reactstrap';
+import CountUp from 'react-countup';
 import '../stylesheets/Scoreboard.css';
 
 const Scoreboard = () => {
@@ -29,11 +30,20 @@ const Scoreboard = () => {
     return data.map((player, index) => {
       console.log(player);
       index++;
+      const countTime = parseFloat(player.score) / 1200;
+      console.log(countTime);
       return (
         <tr>
           <th scope='row'>{index}</th>
           <td>{player.username}</td>
-          <td>{player.score}</td>
+          <td>
+            <CountUp
+              start={0}
+              end={player.score}
+              duration={countTime}
+              separator={','}
+            />
+          </td>
         </tr>
       );
     });
@@ -93,7 +103,6 @@ const tableStyle = {
   height: '85%',
   borderRadius: '2rem',
   padding: '2rem',
-  border: '1px red',
   color: '#0e1a49',
   margin: '0px',
 };
