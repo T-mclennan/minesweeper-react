@@ -1,5 +1,11 @@
 import React, { useState } from 'react';
-import { Button, Input, Label, FormGroup, Col } from 'reactstrap';
+import {
+  Button,
+  Input,
+  Label,
+  FormGroup,
+  UncontrolledTooltip,
+} from 'reactstrap';
 // import VirusLogo from '../assets/icons/viruses-solid.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -164,28 +170,49 @@ const Landing = () => {
       </div>
       <div style={FooterContainer} className='footer'>
         <div style={Footer} className='content'>
-          <a href={'/scores'}>
+          <a href={'/scores'} id='scoreboard'>
             <FontAwesomeIcon
               icon={faListAlt}
               // style={Icon}
               className='icon far fa-2x fa-in'
             />
+            <UncontrolledTooltip
+              style={tooltip}
+              placement='below'
+              target='scoreboard'
+            >
+              Scoreboard
+            </UncontrolledTooltip>
           </a>
-          <a href={'https://www.github.com/T-mclennan'}>
+          <a href={'https://www.github.com/T-mclennan'} id='information'>
             <FontAwesomeIcon
               icon={faGithubAlt}
               // style={Icon}
               className='icon far fa-2x fa-i'
             />
           </a>
-          <a href={'https://www.github.com/T-mclennan'}>
+          <UncontrolledTooltip
+            style={tooltip}
+            placement='below'
+            target='information'
+          >
+            Information
+          </UncontrolledTooltip>
+          <a href={'https://www.github.com/T-mclennan'} id='github'>
             <FontAwesomeIcon
               icon={faGithubSquare}
               // style={Icon}
               className='icon far fa-2x fa-in'
             />
           </a>
-          <i className='far fa-question-circle'></i>
+          <UncontrolledTooltip
+            style={tooltip}
+            placement='below'
+            target='github'
+          >
+            Github
+          </UncontrolledTooltip>
+          {/* <i className='far fa-question-circle'></i> */}
         </div>
       </div>
     </div>
@@ -273,11 +300,18 @@ const FooterContainer = {
   justifyContent: 'center',
   height: '5rem',
   width: '100%',
+  // margin: '0 2rem',
 };
 
 const LabelStyle = {
   fontSize: '1.3rem',
   paddingTop: '3px',
+};
+
+const tooltip = {
+  backgroundColor: 'transparent',
+  color: '#d41b53',
+  fontSize: '1.2rem',
 };
 
 const Footer = {
