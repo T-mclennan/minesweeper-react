@@ -1,11 +1,12 @@
 import React from 'react';
 import Game from './components/Game/Game';
 import { Router } from 'react-router';
-import { Route, Link } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 
 import history from './history';
 import Landing from './pages/Landing';
 import Scoreboard from './pages/Scoreboard';
+import NotFound from './pages/NotFound';
 import './stylesheets/App.css';
 
 function App() {
@@ -23,9 +24,8 @@ function App() {
         <Route exact path='/scores'>
           <Scoreboard />
         </Route>
+        <Route path='/*' component={NotFound} />
       </Router>
-
-      {/* <Route path='/*' component={FourOFour} /> */}
     </div>
   );
 }
