@@ -1,10 +1,5 @@
 import React, { Component } from 'react';
-import {
-  initBoard,
-  revealCells,
-  showBoard,
-  extraBoardClear,
-} from '../../actions/initBoard';
+import { initBoard, revealCells, showBoard } from '../../actions/initBoard';
 import Board from '../Board/Board';
 import { checkWin, generateScore } from '../../actions/checkWin';
 import { GameProvider } from './GameContext';
@@ -128,9 +123,50 @@ export default class Game extends Component {
   doubleClickHandler = (event, x, y) => {
     event.preventDefault();
     let { board } = this.state;
+    const { height, width } = this.props.match.params;
+
+    // Chosen behavior was to have double click with wrong flags leading to a game loss.
+    // The easiest way to execute this was to perform a click on each surrounding square.
 
     if (board[y][x].isVisible && !board[y][x].isFlagged) {
-      board = extraBoardClear(board, x, y);
+      if (y > 0) {
+        this.leftClickHandler(x, y - 1);
+
+        // top left:
+        if (x > 0) {
+          this.leftClickHandler(x - 1, y - 1);
+        }
+
+        //top right:
+        if (x + 1 < width) {
+          this.leftClickHandler(x + 1, y - 1);
+        }
+      }
+
+      //bottom:
+      if (y + 1 < height) {
+        this.leftClickHandler(x, y + 1);
+
+        // bottom left:
+        if (x > 0) {
+          this.leftClickHandler(x - 1, y + 1);
+        }
+
+        //bottom right:
+        if (x + 1 < width) {
+          this.leftClickHandler(x + 1, y + 1);
+        }
+      }
+
+      // left:
+      if (x > 0) {
+        this.leftClickHandler(x - 1, y);
+      }
+
+      //right:
+      if (x + 1 < width) {
+        this.leftClickHandler(x + 1, y);
+      }
     }
 
     this.setState({ board: board });
