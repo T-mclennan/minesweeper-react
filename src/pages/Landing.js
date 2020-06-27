@@ -38,7 +38,6 @@ const Landing = () => {
 
   const changeDifficulty = (e) => {
     setDifficulty(e.target.value);
-    console.log(e.target.value);
 
     switch (e.target.value) {
       case 'Beginner':
@@ -50,25 +49,31 @@ const Landing = () => {
       case 'Novice':
         setHeight(12);
         setWidth(12);
-        setMines(25);
+        setMines(22);
         break;
 
       case 'Intermediate':
         setHeight(12);
         setWidth(18);
-        setMines(50);
+        setMines(44);
         break;
 
       case 'Advanced':
         setHeight(15);
-        setWidth(20);
-        setMines(60);
+        setWidth(18);
+        setMines(70);
+        break;
+
+      case 'Expert':
+        setHeight(17);
+        setWidth(30);
+        setMines(155);
         break;
 
       case 'Master':
         setHeight(17);
-        setWidth(30);
-        setMines(110);
+        setWidth(40);
+        setMines(275);
         break;
     }
   };
@@ -107,6 +112,7 @@ const Landing = () => {
               <option>Novice</option>
               <option>Intermediate</option>
               <option>Advanced</option>
+              <option>Expert</option>
               <option>Master</option>
               <option>Custom</option>
             </Input>
@@ -125,7 +131,7 @@ const Landing = () => {
               value={height}
               onChange={(e) => setHeight(Number(e.target.value))}
             >
-              {createSelectItems(5, 30)}
+              {createSelectItems(5, 20)}
             </Input>
           </FormGroup>
 
@@ -142,7 +148,7 @@ const Landing = () => {
               disabled={!(difficulty === 'Custom')}
               onChange={(e) => setWidth(Number(e.target.value))}
             >
-              {createSelectItems(5, 35)}
+              {createSelectItems(5, 40)}
             </Input>
           </FormGroup>
 
@@ -178,7 +184,7 @@ const Landing = () => {
             />
             <UncontrolledTooltip
               style={tooltip}
-              placement='below'
+              placement='bottom'
               target='scoreboard'
             >
               Scoreboard
@@ -193,7 +199,7 @@ const Landing = () => {
           </a>
           <UncontrolledTooltip
             style={tooltip}
-            placement='below'
+            placement='bottom'
             target='information'
           >
             Information
@@ -207,7 +213,7 @@ const Landing = () => {
           </a>
           <UncontrolledTooltip
             style={tooltip}
-            placement='below'
+            placement='bottom'
             target='github'
           >
             Github
@@ -222,7 +228,6 @@ const Landing = () => {
 const Styling = {
   backgroundImage:
     'linear-gradient(to bottom, #0e1a49 0%, #red 30%,#002fa7 100%)',
-  // backgroundColor: 'white',
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-around',
@@ -231,7 +236,6 @@ const Styling = {
 };
 
 const TitleContainer = {
-  // flex: 1,
   display: 'flex',
   flexDirection: 'row',
   justifyContent: 'center',
@@ -240,7 +244,6 @@ const TitleContainer = {
 };
 
 const FormContainer = {
-  // flex: 3,
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'center',

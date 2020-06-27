@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Table } from 'reactstrap';
 import CountUp from 'react-countup';
 import history from '../history';
+
+import { getScores } from '../actions/scoring';
 import '../stylesheets/Scoreboard.css';
 
 const Scoreboard = () => {
@@ -18,23 +20,33 @@ const Scoreboard = () => {
     { username: 'Stephan', score: 2003 },
   ];
 
-  const [scores, setScores] = useState(mockScores);
+  // const [scores, setScores] = useState(mockScores);
+  const [scores, setScores] = useState([]);
+  const [isLoading, setLoading] = useState(false);
 
-  // useEffect(() => {
-  //   const fetchAPI = async () => {
-  //     setScores(await fetchScores());
-  //   };
-  //   fetchAPI();
-  // }, [setScores]);
+  useEffect(() => {
+    async function onLoad() {
+      setLoading(true);
+      try {
+        const newScores = await getScores();
+        // console.log('inside scoreboard');
+        // console.log(newScores);
+        setScores(newScores);
+        setLoading(false);
+      } catch (e) {
+        console.log(e);
+      }
+    }
+
+    onLoad();
+  }, []);
 
   const renderResultRows = (data) => {
     return data.map((player, index) => {
-      console.log(player);
       index++;
       const countTime = parseFloat(player.score) / 1200;
-      console.log(countTime);
       return (
-        <tr>
+        <tr key={index}>
           <th scope='row'>{index}</th>
           <td>{player.username}</td>
           <td>
@@ -54,7 +66,7 @@ const Scoreboard = () => {
     history.push('/');
   };
 
-  return (
+  return !isLoading ? (
     <div className='standings-page' onClick={() => handleClick()}>
       <h2 className='header'>Top Players:</h2>
       <div style={outerScoreContainer}>
@@ -74,7 +86,7 @@ const Scoreboard = () => {
               </tr>
             </thead>
             <tbody>
-              {mockScores.length > 0 ? (
+              {scores.length > 0 ? (
                 renderResultRows(scores)
               ) : (
                 <tr>
@@ -86,6 +98,8 @@ const Scoreboard = () => {
         </div>
       </div>
     </div>
+  ) : (
+    ''
   );
 };
 

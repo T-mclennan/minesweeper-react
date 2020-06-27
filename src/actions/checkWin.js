@@ -14,13 +14,22 @@ export const checkWin = (board) => {
 };
 
 export const generateScore = (elapsed, width, height, mines) => {
-  console.log(`width: ${width} height: ${height} mines: ${mines}`);
+  // console.log(`width: ${width} height: ${height} mines: ${mines}`);
   const mineCoefficient = mines / (width * height);
-  const upperBound = 6000 * mines * (1 + (mineCoefficient - 0.1));
-  // const mineCoefficient = mines / (width * height);
-  const score = ((upperBound - elapsed) * mineCoefficient) / 2;
-  console.log(`elapsed time: ${elapsed} upper bound: ${upperBound}`);
-  console.log(`mine coefficient: ${mineCoefficient - 0.1} score: ${score}`);
+  const sizeCoefficient = mines * 12;
+  const timeCoefficient =
+    (2600 * (1 + mineCoefficient) + sizeCoefficient) / 1000;
+  const baseScore = 1200 * (1 + mineCoefficient * 5);
+  const elapsedTime = elapsed / (1000 * mines);
 
+  const modifier =
+    timeCoefficient > elapsedTime ? timeCoefficient - elapsedTime : 1;
+  const score = baseScore * modifier;
+  // console.log(timeCoefficient * mines);
+  // console.log(elapsedTime);
+
+  // console.log(
+  //   `modifier: ${modifier} mineCoeff: ${mineCoefficient} timeCoefficient: ${timeCoefficient} baseScore: ${baseScore} score: ${score}`
+  // );
   return Math.floor(score);
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Amplify } from 'aws-amplify';
+import { Amplify, Auth } from 'aws-amplify';
 import config from './config';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -8,7 +8,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './stylesheets/index.css';
 import App from './App';
 
+// var identityId = AWS.config.credentials.identityId;
+
 Amplify.configure({
+  Auth: {
+    mandatorySignIn: false,
+    region: config.cognito.REGION,
+    identityPoolId: config.cognito.IDENTITY_POOL_ID,
+  },
   API: {
     endpoints: [
       {
@@ -19,6 +26,8 @@ Amplify.configure({
     ],
   },
 });
+
+Auth.currentCredentials().catch((e) => console.log('error: ', e));
 
 ReactDOM.render(
   <React.StrictMode>

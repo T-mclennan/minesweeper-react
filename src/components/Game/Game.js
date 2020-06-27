@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import { initBoard, revealCells, showBoard } from '../../actions/initBoard';
 import Board from '../Board/Board';
 import { checkWin, generateScore } from '../../actions/checkWin';
+import { HighScoreModal } from '../Score/HighScoreModal';
 import { GameProvider } from './GameContext';
+import { getScores } from '../../actions/scoring';
+
 import InfoBar from '../InfoBar/InfoBar';
 import UIfx from 'uifx';
 import boom from '../../assets/audio/explosion.mp3';
@@ -19,7 +22,7 @@ export default class Game extends Component {
       height: height,
       board: initBoard(height, width, mines),
       mines: mines,
-      gameStatus: '',
+      gameStatus: `Mines remaining: ${mines}`,
       playing: true,
       firstClick: true,
       finalCell: {},
@@ -27,15 +30,17 @@ export default class Game extends Component {
       sfx: new UIfx(boom, {
         volume: 0.4,
       }),
+      showModal: true,
     };
   }
 
-  componentDidMount() {
-    const { gameStatus, mines } = this.state;
-    if (!gameStatus) {
-      this.setState({ gameStatus: `Mines remaining: ${mines}` });
-    }
-  }
+  // componentDidMount() {
+  //   const { gameStatus, mines } = this.state;
+  //   if (!gameStatus) {
+  //     this.setState({ gameStatus: `Mines remaining: ${mines}` });
+  //     this.checkHighScore(2000);
+  //   }
+  // }
 
   checkForWin = (board) => {
     if (checkWin(board)) {
@@ -47,7 +52,7 @@ export default class Game extends Component {
   };
 
   resetGame = () => {
-    const { height, width, mines } = this.state;
+    const { height, width, mines } = this.props.match.params;
     this.setState({
       board: initBoard(height, width, mines),
       gameStatus: `Mines remaining: ${mines}`,
@@ -187,7 +192,53 @@ export default class Game extends Component {
         score: score,
         gameStatus: `You win! Score is: ${score}`,
       });
+
+      if (this.checkHighScore(score)) {
+        this.setState({ showModal: true });
+      }
     }
+  };
+
+  //checkHighScore: Fetches high score data, returns True if current score is in top 10:
+  //Input: Int
+  //Output: Boolean
+  checkHighScore = async (score) => {
+    const mockScores = [
+      { username: 'Harry', score: 1000 },
+      { username: 'Tina', score: 1050 },
+      { username: 'Sarah', score: 1111 },
+      { username: 'Chris', score: 2010 },
+      { username: 'Sash', score: 1111 },
+      { username: 'Stephan', score: 2003 },
+      { username: 'Sarah', score: 1111 },
+      { username: 'Chris', score: 2010 },
+      { username: 'Sash', score: 1111 },
+      { username: 'Stephan', score: 2003 },
+    ];
+
+    // console.log(mockScores);
+
+    const totalScores = mockScores.sort(function (a, b) {
+      return b.score - a.score;
+    });
+
+    const lowestHighScore =
+      totalScores.length < 10 ? totalScores.pop() : totalScores[9];
+
+    // console.log(`lowestHighScore: ${lowestHighScore.score}`);
+    // console.log(lowestHighScore.score < score);
+    // try {
+    //   const allScores = await getScores();
+    //   console.log('inside check Score');
+    //   console.log(mockScores);
+    // } catch (e) {
+    //   console.log(e);
+    // }
+    return lowestHighScore.score < score;
+  };
+
+  toggleModal = () => {
+    this.setState({ showModal: !this.state.showModal });
   };
 
   render() {
@@ -213,6 +264,10 @@ export default class Game extends Component {
         <GameProvider value={gameState}>
           <div className='main-content'>
             {/* {renderBoard(board)} */}
+            <HighScoreModal
+              toggle={this.toggleModal}
+              modal={this.state.showModal}
+            />
             <Board board={board} over={gameStatus === 'Game over, you lost!'} />
           </div>
         </GameProvider>

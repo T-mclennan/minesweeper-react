@@ -23,8 +23,6 @@ class Clock extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    // check whether client has changed
-
     if (prevProps.playing !== this.props.playing) {
       this.setState({
         timerOn: this.props.playing,
@@ -37,8 +35,7 @@ class Clock extends Component {
   startClock = () => {
     this.setState({
       timerOn: true,
-      timerTime: this.state.timerTime,
-      timerStart: Date.now() - this.state.timerTime,
+      timerStart: Date.now(),
     });
     this.timer = setInterval(() => {
       this.setState({
@@ -54,6 +51,7 @@ class Clock extends Component {
   };
 
   resetClock = () => {
+    console.log('resetting clock');
     this.setState({
       timerStart: 0,
       timerTime: 0,
