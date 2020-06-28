@@ -30,7 +30,7 @@ export default class Game extends Component {
       sfx: new UIfx(boom, {
         volume: 0.4,
       }),
-      showModal: true,
+      showModal: false,
     };
   }
 

@@ -40,6 +40,8 @@ const barStyle = {
   flexDirection: 'row',
   justifyContent: 'space-between',
   alignContent: 'center',
+  backgroundColor: 'rgba(14,26,73,0.3)',
+  border: '1px solid rgba(14,26,73,0.5)',
 };
 
 const invisibleButton = {
