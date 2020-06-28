@@ -253,7 +253,6 @@ export default class Game extends Component {
     };
 
     return (
-      //Add context API here:
       <div className='game'>
         <InfoBar
           status={gameStatus}
@@ -263,7 +262,6 @@ export default class Game extends Component {
         />
         <GameProvider value={gameState}>
           <div className='main-content'>
-            {/* {renderBoard(board)} */}
             <HighScoreModal
               toggle={this.toggleModal}
               modal={this.state.showModal}

@@ -19,7 +19,7 @@ export const generateScore = (elapsed, width, height, mines) => {
   const sizeCoefficient = mines * 12;
   const timeCoefficient =
     (2600 * (1 + mineCoefficient) + sizeCoefficient) / 1000;
-  const baseScore = 1200 * (1 + mineCoefficient * 5);
+  const baseScore = 1200 * (1 + mineCoefficient * 6);
   const elapsedTime = elapsed / (1000 * mines);
 
   const modifier =
@@ -28,8 +28,8 @@ export const generateScore = (elapsed, width, height, mines) => {
   // console.log(timeCoefficient * mines);
   // console.log(elapsedTime);
 
-  // console.log(
-  //   `modifier: ${modifier} mineCoeff: ${mineCoefficient} timeCoefficient: ${timeCoefficient} baseScore: ${baseScore} score: ${score}`
-  // );
+  console.log(
+    `modifier: ${modifier} mineCoeff: ${mineCoefficient} timeCoefficient: ${timeCoefficient} baseScore: ${baseScore} score: ${score}`
+  );
   return Math.floor(score);
 };
