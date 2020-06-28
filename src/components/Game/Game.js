@@ -34,14 +34,6 @@ export default class Game extends Component {
     };
   }
 
-  // componentDidMount() {
-  //   const { gameStatus, mines } = this.state;
-  //   if (!gameStatus) {
-  //     this.setState({ gameStatus: `Mines remaining: ${mines}` });
-  //     this.checkHighScore(2000);
-  //   }
-  // }
-
   checkForWin = (board) => {
     if (checkWin(board)) {
       this.setState({

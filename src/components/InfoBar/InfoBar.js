@@ -9,26 +9,32 @@ import history from '../../history';
 const infoBar = (props) => {
   return (
     <div style={barStyle}>
-      <h5 className='game-status'>{props.status}</h5>
-      <Button
-        variant='outlined'
-        style={props.playing ? invisibleButton : HomeButton}
-        onClick={() => {
-          history.push('/');
-        }}
-      >
-        Main Menu
-      </Button>
-      <Button
-        variant='outlined'
-        style={props.playing ? invisibleButton : ReplayButton}
-        onClick={() => {
-          props.resetGame();
-        }}
-      >
-        Play Again?
-      </Button>
-      <Clock playing={props.playing} updateTime={props.updateTime} />
+      <div style={statusContainer}>
+        <h5 className='game-status'>{props.status}</h5>
+      </div>
+      <div style={ButtonContainer}>
+        <Button
+          variant='outlined'
+          style={props.playing ? outlineButton : HomeButton}
+          onClick={() => {
+            history.push('/');
+          }}
+        >
+          Main Menu
+        </Button>
+        <Button
+          variant='outlined'
+          style={props.playing ? outlineButton : ReplayButton}
+          onClick={() => {
+            props.resetGame();
+          }}
+        >
+          {props.playing ? 'Restart' : 'Play Again?'}
+        </Button>
+      </div>
+      <div style={clockContainer}>
+        <Clock playing={props.playing} updateTime={props.updateTime} />
+      </div>
     </div>
   );
 };
@@ -38,35 +44,56 @@ const barStyle = {
   display: 'flex',
   color: '#0e2754',
   flexDirection: 'row',
-  justifyContent: 'space-between',
+  // justifyContent: 'space-between',
   alignContent: 'center',
   backgroundColor: 'rgba(14,26,73,0.3)',
   border: '1px solid rgba(14,26,73,0.5)',
 };
 
-const invisibleButton = {
-  display: 'none',
+const container = {
+  display: 'flex',
+  color: '#0e2754',
+  flexDirection: 'row',
+  justifyContent: 'center',
+  alignContent: 'center',
+};
+
+const statusContainer = {
+  ...container,
+  flex: 4,
+};
+
+const ButtonContainer = {
+  ...container,
+  flex: 5,
+};
+
+const clockContainer = {
+  ...container,
+  flex: 3,
 };
 
 const ButtonStyle = {
   color: 'white',
   fontSize: '1rem',
   height: '3.2rem',
-  width: '10rem',
+  width: '12.5rem',
   fontWeight: 'bold',
   borderColor: 'white',
   borderRadius: '1rem',
-  marginTop: '0.5rem',
+  margin: '0.5rem',
 };
+
+const outlineButton = { ...ButtonStyle, backgroundColor: 'transparent' };
 
 const HomeButton = {
   ...ButtonStyle,
-  backgroundColor: 'red',
+  backgroundColor: 'rgba(255, 0, 0, 0.4)',
 };
 
 const ReplayButton = {
   ...ButtonStyle,
-  backgroundColor: 'deepskyblue',
+  backgroundColor: 'rgba(0,191,255, 0.4)',
 };
 
 infoBar.propTypes = {};

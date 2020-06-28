@@ -1,12 +1,7 @@
 .game-status {
-  margin: 0 3rem;
   color: white;
   font-size: 1rem;
-  /* -webkit-text-fill-color: white;
-  -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: rgba(14, 26, 73, 0.4); */
   font: small-caps 43px/150% 'Segoe UI', Frutiger, 'Frutiger Linotype',
     'Dejavu Sans', 'Helvetica Neue', Arial, sans-serif;
-
   justify-content: space-evenly;
 }
