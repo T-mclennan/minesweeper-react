@@ -66,3 +66,18 @@ button:hover {
     rgb(248, 9, 69)
   );
 }
+
+button.blue:hover {
+  background: -webkit-radial-gradient(
+    /* 260deg, */ /* rgb(28, 88, 218), */ rgba(8, 130, 187, 0.938),
+    rgb(4, 75, 168)
+  );
+}
+
+button.red:hover {
+  background: -webkit-radial-gradient(
+    /* 240deg, */ /* rgb(218, 28, 139), */ rgba(255, 69, 119, 0.589),
+    rgb(248, 9, 69),
+    rgb(218, 2, 56)
+  );
+}

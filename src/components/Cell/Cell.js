@@ -80,7 +80,8 @@ const Cell = (props) => {
       return {
         ...seenCell,
         backgroundColor: 'rgb(242, 171, 163)',
-        border: '2px solid rgb(186, 34, 17)',
+        // border: '2px solid rgb(186, 34, 17)',
+        border: '1px solid rgb(248, 9, 69)',
       };
     } else if (isRevealed) {
       return { ...seenCell, backgroundColor: '#EADBD7' };
@@ -137,7 +138,6 @@ const seenCell = {
 };
 
 const emptyCell = {
-  // backgroundColor: '#faf2f2',
   fontSize: '1.5rem',
   border: '1px dotted rgb(218, 218, 218)',
 };

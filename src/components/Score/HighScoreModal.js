@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
+import history from '../../history';
+import LoaderButton from './LoaderButton';
+import { addScore } from '../../actions/scoring';
 import {
   Button,
   Modal,
@@ -10,8 +13,30 @@ import {
   Input,
 } from 'reactstrap';
 
-export const HighScoreModal = (props) => {
-  const { toggle, modal } = props;
+export const HighScoreModal = ({ score, toggle, modal }) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [username, setUsername] = useState('');
+
+  const submitScore = async (event) => {
+    event.preventDefaults();
+    setIsLoading(true);
+    console.log(username, score);
+    try {
+      await addScore(username, score);
+      history.push('/scores');
+      toggle();
+    } catch (e) {
+      console.log(e);
+      setIsLoading(false);
+      history.push('/scores');
+    }
+  };
+
+  const onChangeHandler = (e) => {
+    console.log(e.target);
+    setUsername(e.target.value);
+    console.log(e.target.value);
+  };
 
   return (
     <div>
@@ -26,7 +51,7 @@ export const HighScoreModal = (props) => {
           <h2>High Score!!</h2>
         </ModalHeader>
         <ModalBody style={modalBody}>
-          <Form style={formStyle}>
+          <Form style={formStyle} onSubmit={submitScore}>
             <FormGroup style={{ margin: 'auto' }}>
               <Label for='username'>Please enter a username:</Label>
               <Input
@@ -36,11 +61,17 @@ export const HighScoreModal = (props) => {
                 placeholder='myName1234'
                 maxLength='12'
                 style={inputStyle}
+                onChange={(e) => onChangeHandler(e)}
               />
             </FormGroup>
-            <Button style={buttonStyle} color='primary' onClick={toggle}>
+            <LoaderButton
+              loading={isLoading}
+              style={buttonStyle}
+              color='primary'
+              // onClick={toggle}
+            >
               Submit Score!
-            </Button>
+            </LoaderButton>
           </Form>
         </ModalBody>
       </Modal>
@@ -62,7 +93,6 @@ const buttonStyle = {
 const modalBody = {
   display: 'flex',
   justifyContent: 'flex-start',
-  // padding: '1rem 4rem 1rem 4rem',
 };
 
 const modalHeader = {

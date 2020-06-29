@@ -23,7 +23,7 @@ export default class Game extends Component {
       board: initBoard(height, width, mines),
       mines: mines,
       gameStatus: `Mines remaining: ${mines}`,
-      playing: true,
+      playing: false,
       firstClick: true,
       finalCell: {},
       score: 0,
@@ -31,7 +31,17 @@ export default class Game extends Component {
         volume: 0.4,
       }),
       showModal: false,
+      intro: false,
+      countDown: 3,
     };
+  }
+
+  componentDidMount() {
+    this.beginGame();
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.myInterval);
   }
 
   checkForWin = (board) => {
@@ -233,8 +243,34 @@ export default class Game extends Component {
     this.setState({ showModal: !this.state.showModal });
   };
 
+  beginGame = () => {
+    this.setState({ playing: false, intro: true, countDown: 3 });
+    this.myInterval = setInterval(() => {
+      const { countDown } = this.state;
+
+      if (countDown > 1) {
+        this.setState(({ countDown }) => ({
+          countDown: countDown - 1,
+        }));
+      } else {
+        clearInterval(this.myInterval);
+        this.resetGame();
+        this.setState({ playing: true, intro: false, countDown: 3 });
+      }
+    }, 1000);
+  };
+
   render() {
-    const { board, gameStatus, playing, finalCell } = this.state;
+    const {
+      board,
+      gameStatus,
+      playing,
+      finalCell,
+      countDown,
+      showModal,
+      intro,
+      score,
+    } = this.state;
     const gameState = {
       gameStatus: gameStatus,
       finalCell: finalCell,
@@ -250,18 +286,40 @@ export default class Game extends Component {
           status={gameStatus}
           playing={playing}
           updateTime={this.updateTimeUsed}
-          resetGame={this.resetGame}
+          resetGame={this.beginGame}
         />
         <GameProvider value={gameState}>
           <div className='main-content'>
             <HighScoreModal
+              score={score}
               toggle={this.toggleModal}
-              modal={this.state.showModal}
+              modal={showModal}
             />
-            <Board board={board} over={gameStatus === 'Game over, you lost!'} />
+            {countDown > 0 && intro ? (
+              <div style={countDownContainer}>
+                <h1 style={countdown}>{countDown}</h1>
+              </div>
+            ) : (
+              <Board
+                board={board}
+                over={gameStatus === 'Game over, you lost!'}
+              />
+            )}
           </div>
         </GameProvider>
       </div>
     );
   }
 }
+
+const countDownContainer = {
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+};
+
+const countdown = {
+  color: 'white',
+  fontSize: '9rem',
+  marginBottom: '1rem',
+};

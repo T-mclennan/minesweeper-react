@@ -80,7 +80,6 @@ const Landing = () => {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    console.log('submit handler');
     history.push(`/play/${width}/${height}/${mines}`);
   };
 

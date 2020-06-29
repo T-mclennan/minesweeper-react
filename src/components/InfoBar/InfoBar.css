@@ -5,3 +5,8 @@
     'Dejavu Sans', 'Helvetica Neue', Arial, sans-serif;
   justify-content: space-evenly;
 }
+
+.btn:focus {
+  outline: none;
+  box-shadow: none;
+}

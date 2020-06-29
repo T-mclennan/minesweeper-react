@@ -10,5 +10,3 @@ export const addScore = (username, score) => {
     score: score,
   });
 };
-
-export const checkIfHighscore = (scores, currentScore) => {};

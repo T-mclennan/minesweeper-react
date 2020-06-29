@@ -1,6 +1,6 @@
 import React from 'react';
-import { Button, Glyphicon } from 'reactstrap';
-import './LoaderButton.css';
+import { Button, Spinner } from 'reactstrap';
+// import './LoaderButton.css';
 
 export default function LoaderButton({
   isLoading,
@@ -14,7 +14,7 @@ export default function LoaderButton({
       disabled={disabled || isLoading}
       {...props}
     >
-      {isLoading && <Glyphicon glyph='refresh' className='spinning' />}
+      {isLoading && <Spinner style={{ width: '3rem', height: '3rem' }} />}
       {props.children}
     </Button>
   );

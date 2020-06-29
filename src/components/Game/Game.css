@@ -29,3 +29,7 @@
   margin-bottom: 0.5;
   /* background-color: rgb(186, 34, 17); */
 }
+
+.arrow::before {
+  border-bottom-color: transparent !important;
+}

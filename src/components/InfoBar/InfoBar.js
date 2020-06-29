@@ -14,6 +14,7 @@ const infoBar = (props) => {
       </div>
       <div style={ButtonContainer}>
         <Button
+          className='red'
           variant='outlined'
           style={props.playing ? outlineButton : HomeButton}
           onClick={() => {
@@ -23,6 +24,7 @@ const infoBar = (props) => {
           Main Menu
         </Button>
         <Button
+          className='blue'
           variant='outlined'
           style={props.playing ? outlineButton : ReplayButton}
           onClick={() => {
@@ -44,7 +46,6 @@ const barStyle = {
   display: 'flex',
   color: '#0e2754',
   flexDirection: 'row',
-  // justifyContent: 'space-between',
   alignContent: 'center',
   backgroundColor: 'rgba(14,26,73,0.3)',
   border: '1px solid rgba(14,26,73,0.5)',
