@@ -17,23 +17,22 @@ export const HighScoreModal = ({ score, toggle, modal }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [username, setUsername] = useState('');
 
-  const submitScore = async (event) => {
-    event.preventDefaults();
+  async function submitScore(event) {
+    event.preventDefault();
     setIsLoading(true);
     console.log(username, score);
     try {
-      await addScore(username, score);
+      console.log(score);
+      await addScore({ username: username, score: score });
       history.push('/scores');
       toggle();
     } catch (e) {
       console.log(e);
       setIsLoading(false);
-      history.push('/scores');
     }
-  };
+  }
 
   const onChangeHandler = (e) => {
-    console.log(e.target);
     setUsername(e.target.value);
     console.log(e.target.value);
   };
@@ -64,14 +63,14 @@ export const HighScoreModal = ({ score, toggle, modal }) => {
                 onChange={(e) => onChangeHandler(e)}
               />
             </FormGroup>
-            <LoaderButton
+            <Button
+              type='submit'
               loading={isLoading}
               style={buttonStyle}
               color='primary'
-              // onClick={toggle}
             >
               Submit Score!
-            </LoaderButton>
+            </Button>
           </Form>
         </ModalBody>
       </Modal>

@@ -3,24 +3,10 @@ import { Table } from 'reactstrap';
 import CountUp from 'react-countup';
 import history from '../history';
 
-import { getScores } from '../actions/scoring';
+import { getScores, cleanScores } from '../actions/scoring';
 import '../stylesheets/Scoreboard.css';
 
 const Scoreboard = () => {
-  const mockScores = [
-    { username: 'Harry', score: 1000 },
-    { username: 'Tina', score: 1050 },
-    { username: 'Sarah', score: 1111 },
-    { username: 'Chris', score: 2010 },
-    { username: 'Sash', score: 1111 },
-    { username: 'Stephan', score: 2003 },
-    { username: 'Sarah', score: 1111 },
-    { username: 'Chris', score: 2010 },
-    { username: 'Sash', score: 1111 },
-    { username: 'Stephan', score: 2003 },
-  ];
-
-  // const [scores, setScores] = useState(mockScores);
   const [scores, setScores] = useState([]);
   const [isLoading, setLoading] = useState(false);
 
@@ -28,9 +14,9 @@ const Scoreboard = () => {
     async function onLoad() {
       setLoading(true);
       try {
-        const newScores = await getScores();
-        // console.log('inside scoreboard');
-        // console.log(newScores);
+        const scores = await getScores();
+        console.log(scores);
+        const newScores = cleanScores(scores);
         setScores(newScores);
         setLoading(false);
       } catch (e) {
@@ -90,7 +76,7 @@ const Scoreboard = () => {
                 renderResultRows(scores)
               ) : (
                 <tr>
-                  <th>no scores yet!</th>
+                  <th>No scores yet!</th>
                 </tr>
               )}
             </tbody>

@@ -4,7 +4,7 @@ import Board from '../Board/Board';
 import { checkWin, generateScore } from '../../actions/checkWin';
 import { HighScoreModal } from '../Score/HighScoreModal';
 import { GameProvider } from './GameContext';
-import { getScores } from '../../actions/scoring';
+import { getScores, cleanScores } from '../../actions/scoring';
 
 import InfoBar from '../InfoBar/InfoBar';
 import UIfx from 'uifx';
@@ -205,37 +205,11 @@ export default class Game extends Component {
   //Input: Int
   //Output: Boolean
   checkHighScore = async (score) => {
-    const mockScores = [
-      { username: 'Harry', score: 1000 },
-      { username: 'Tina', score: 1050 },
-      { username: 'Sarah', score: 1111 },
-      { username: 'Chris', score: 2010 },
-      { username: 'Sash', score: 1111 },
-      { username: 'Stephan', score: 2003 },
-      { username: 'Sarah', score: 1111 },
-      { username: 'Chris', score: 2010 },
-      { username: 'Sash', score: 1111 },
-      { username: 'Stephan', score: 2003 },
-    ];
-
     // console.log(mockScores);
 
-    const totalScores = mockScores.sort(function (a, b) {
-      return b.score - a.score;
-    });
-
-    const lowestHighScore =
-      totalScores.length < 10 ? totalScores.pop() : totalScores[9];
-
-    // console.log(`lowestHighScore: ${lowestHighScore.score}`);
-    // console.log(lowestHighScore.score < score);
-    // try {
-    //   const allScores = await getScores();
-    //   console.log('inside check Score');
-    //   console.log(mockScores);
-    // } catch (e) {
-    //   console.log(e);
-    // }
+    const allScores = await getScores();
+    const totalScores = cleanScores(allScores);
+    const lowestHighScore = totalScores.pop();
     return lowestHighScore.score < score;
   };
 
