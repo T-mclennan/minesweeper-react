@@ -15,7 +15,6 @@ const Scoreboard = () => {
       setLoading(true);
       try {
         const scores = await getScores();
-        console.log(scores);
         const newScores = cleanScores(scores);
         setScores(newScores);
         setLoading(false);
@@ -71,15 +70,7 @@ const Scoreboard = () => {
                 <th style={{ width: '17rem' }}>Score</th>
               </tr>
             </thead>
-            <tbody>
-              {scores.length > 0 ? (
-                renderResultRows(scores)
-              ) : (
-                <tr>
-                  <th>No scores yet!</th>
-                </tr>
-              )}
-            </tbody>
+            <tbody>{scores.length > 0 ? renderResultRows(scores) : ''}</tbody>
           </Table>
         </div>
       </div>

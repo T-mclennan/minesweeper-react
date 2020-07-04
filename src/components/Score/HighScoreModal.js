@@ -20,9 +20,7 @@ export const HighScoreModal = ({ score, toggle, modal }) => {
   async function submitScore(event) {
     event.preventDefault();
     setIsLoading(true);
-    console.log(username, score);
     try {
-      console.log(score);
       await addScore({ username: username, score: score });
       history.push('/scores');
       toggle();
@@ -34,7 +32,6 @@ export const HighScoreModal = ({ score, toggle, modal }) => {
 
   const onChangeHandler = (e) => {
     setUsername(e.target.value);
-    console.log(e.target.value);
   };
 
   return (
@@ -80,6 +77,7 @@ export const HighScoreModal = ({ score, toggle, modal }) => {
 
 const modalStyle = {
   width: '36rem',
+  borderRadius: '0.5rem',
 };
 
 const buttonStyle = {

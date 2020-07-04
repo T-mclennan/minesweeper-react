@@ -24,7 +24,6 @@ export default class Game extends Component {
       mines: mines,
       gameStatus: `Mines remaining: ${mines}`,
       playing: false,
-      firstClick: true,
       finalCell: {},
       score: 0,
       sfx: new UIfx(boom, {
@@ -57,6 +56,7 @@ export default class Game extends Component {
     const { height, width, mines } = this.props.match.params;
     this.setState({
       board: initBoard(height, width, mines),
+      mines: mines,
       gameStatus: `Mines remaining: ${mines}`,
       playing: true,
       finalCell: {},

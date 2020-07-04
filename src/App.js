@@ -7,15 +7,14 @@ import history from './history';
 import Landing from './pages/Landing';
 import Scoreboard from './pages/Scoreboard';
 import NotFound from './pages/NotFound';
+import { isMobile } from 'react-device-detect';
 import './stylesheets/App.css';
 
 function App() {
   return (
     <div className='App'>
       <Router history={history}>
-        {window.innerWidth <= 800 && window.innerHeight <= 600
-          ? history.push('/Wrong-Device')
-          : ''}
+        {isMobile ? history.push('/Wrong-Device') : ''}
         <Switch>
           <Route exact path='/'>
             <Landing />
