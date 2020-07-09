@@ -3,7 +3,7 @@ import { initBoard, revealCells, showBoard } from '../../actions/initBoard';
 import Board from '../Board/Board';
 import { checkWin, generateScore } from '../../actions/checkWin';
 import { HighScoreModal } from '../Score/HighScoreModal';
-import { GameProvider } from './GameContext';
+import { GameProvider, GlobalContext } from './GameContext';
 import { getScores, cleanScores } from '../../actions/scoring';
 
 import InfoBar from '../InfoBar/InfoBar';
@@ -15,7 +15,7 @@ export default class Game extends Component {
   constructor(props) {
     super(props);
 
-    const { height, width, mines } = this.props.match.params;
+    const { height, width, mines } = this.props.gameParams;
 
     this.state = {
       width: width,
@@ -35,6 +35,8 @@ export default class Game extends Component {
     };
   }
 
+  static contextType = GlobalContext;
+
   componentDidMount() {
     this.beginGame();
   }
@@ -53,7 +55,7 @@ export default class Game extends Component {
   };
 
   resetGame = () => {
-    const { height, width, mines } = this.props.match.params;
+    const { height, width, mines } = this.props.gameParams;
     this.setState({
       board: initBoard(height, width, mines),
       mines: mines,
@@ -129,10 +131,9 @@ export default class Game extends Component {
 
   doubleClickHandler = (event, x, y) => {
     event.preventDefault();
-    let { board } = this.state;
-    const { height, width } = this.props.match.params;
+    let { board, width, height } = this.state;
 
-    // Chosen behavior was to have double click with wrong flags leading to a game loss.
+    // Double clicking with wrong flags set leads to a game loss.
     // The easiest way to execute this was to perform a click on each surrounding square.
 
     if (board[y][x].isVisible && !board[y][x].isFlagged) {

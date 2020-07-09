@@ -4,11 +4,8 @@ import { Amplify, Auth } from 'aws-amplify';
 import config from './config';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-
 import './stylesheets/index.css';
 import App from './App';
-
-// var identityId = AWS.config.credentials.identityId;
 
 Amplify.configure({
   Auth: {

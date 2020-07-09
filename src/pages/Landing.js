@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import {
   Button,
   Input,
@@ -16,6 +16,7 @@ import {
 import { faViruses } from '@fortawesome/free-solid-svg-icons';
 import { faListAlt } from '@fortawesome/free-regular-svg-icons';
 import history from '../history';
+import { GlobalContext } from '../context/GlobalState';
 import '../stylesheets/Landing.css';
 
 const Landing = () => {
@@ -23,6 +24,7 @@ const Landing = () => {
   const [mines, setMines] = useState(10);
   const [width, setWidth] = useState(10);
   const [height, setHeight] = useState(10);
+  const { setGameParams } = useContext(GlobalContext);
 
   const createSelectItems = (min, max) => {
     let items = [];
@@ -80,7 +82,8 @@ const Landing = () => {
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    history.push(`/play/${width}/${height}/${mines}`);
+    setGameParams({ height, width, mines });
+    history.push(`/play`);
   };
 
   return (
@@ -88,7 +91,6 @@ const Landing = () => {
       <div style={TitleContainer}>
         <FontAwesomeIcon
           icon={faViruses}
-          // style={Icon}
           className='virus-icon far fa-2x fa-in'
         />
 
