@@ -6,15 +6,21 @@ import {
   FormGroup,
   UncontrolledTooltip,
 } from 'reactstrap';
-// import VirusLogo from '../assets/icons/viruses-solid.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faGithubAlt,
   faGithubSquare,
-  faGithub,
 } from '@fortawesome/free-brands-svg-icons';
-import { faViruses } from '@fortawesome/free-solid-svg-icons';
-import { faListAlt } from '@fortawesome/free-regular-svg-icons';
+import {
+  faViruses,
+  faCog,
+  faUserCog,
+  faQuestionCircle,
+} from '@fortawesome/free-solid-svg-icons';
+import {
+  faListAlt,
+  // faQuestionCircle,
+} from '@fortawesome/free-regular-svg-icons';
 import history from '../history';
 import { GlobalContext } from '../context/GlobalState';
 import '../stylesheets/Landing.css';
@@ -191,24 +197,40 @@ const Landing = () => {
               Scoreboard
             </UncontrolledTooltip>
           </a>
-          <a href={'https://www.github.com/T-mclennan'} id='information'>
+
+          {/* <a href={'/scores'} id='information'>
             <FontAwesomeIcon
-              icon={faGithubAlt}
-              // style={Icon}
-              className='icon far fa-2x fa-i'
+              icon={faQuestionCircle}
+              className='icon far fa-2x fa-in'
             />
+            <UncontrolledTooltip
+              style={tooltip}
+              placement='bottom'
+              target='information'
+            >
+              Info
+            </UncontrolledTooltip>
+          </a> */}
+
+          <a href={'/scores'} id='settings'>
+            <FontAwesomeIcon
+              icon={faUserCog}
+              style={{ fontSize: '1.75rem' }}
+              className='icon far fa-lg fa-in'
+            />
+            <UncontrolledTooltip
+              style={tooltip}
+              placement='bottom'
+              target='settings'
+            >
+              Settings
+            </UncontrolledTooltip>
           </a>
-          <UncontrolledTooltip
-            style={tooltip}
-            placement='bottom'
-            target='information'
-          >
-            Information
-          </UncontrolledTooltip>
+
           <a href={'https://www.github.com/T-mclennan'} id='github'>
             <FontAwesomeIcon
-              icon={faGithubSquare}
-              // style={Icon}
+              icon={faGithubAlt}
+              style={{ fontSize: '2.2rem' }}
               className='icon far fa-2x fa-in'
             />
           </a>
@@ -304,7 +326,6 @@ const FooterContainer = {
   justifyContent: 'center',
   height: '5rem',
   width: '100%',
-  // margin: '0 2rem',
 };
 
 const LabelStyle = {
@@ -320,7 +341,8 @@ const tooltip = {
 
 const Footer = {
   display: 'flex',
-  width: '24rem',
+  // width: '24rem',
+  width: '20rem',
   justifyContent: 'center',
   color: '#0e1a49',
 };

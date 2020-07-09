@@ -3,7 +3,8 @@ import { initBoard, revealCells, showBoard } from '../../actions/initBoard';
 import Board from '../Board/Board';
 import { checkWin, generateScore } from '../../actions/checkWin';
 import { HighScoreModal } from '../Score/HighScoreModal';
-import { GameProvider, GlobalContext } from './GameContext';
+import { GameProvider } from './GameContext';
+import { GlobalContext } from '../../context/GlobalState';
 import { getScores, cleanScores } from '../../actions/scoring';
 
 import InfoBar from '../InfoBar/InfoBar';

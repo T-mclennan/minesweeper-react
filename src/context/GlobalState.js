@@ -7,6 +7,7 @@ const initialState = {
     height: 10,
     mines: 10,
     isSfx: true,
+    animate: true,
     theme: 'orange',
   },
 };
