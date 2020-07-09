@@ -212,7 +212,7 @@ const Landing = () => {
             </UncontrolledTooltip>
           </a> */}
 
-          <a href={'/scores'} id='settings'>
+          <a href={'/settings'} id='settings'>
             <FontAwesomeIcon
               icon={faUserCog}
               style={{ fontSize: '1.75rem' }}

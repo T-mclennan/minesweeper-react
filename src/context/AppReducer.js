@@ -17,8 +17,8 @@ export default (state, action) => {
       return {
         ...state,
         gameParams: {
-          isSfx: !isSfx,
           ...state.gameParams,
+          isSfx: !isSfx,
         },
       };
 
@@ -27,18 +27,19 @@ export default (state, action) => {
       return {
         ...state,
         gameParams: {
-          theme: theme === 'orange' ? 'blue' : 'orange',
           ...state.gameParams,
+          theme: !theme,
         },
       };
 
-    case 'TOGGLE_ANIMATE':
-      const { animate } = state.gameParams;
+    case 'TOGGLE_ANIMATION':
+      const { animation } = state.gameParams;
+      console.log(`inside reducer - animation: ${animation}`);
       return {
         ...state,
         gameParams: {
-          animate: !animate,
           ...state.gameParams,
+          animation: !animation,
         },
       };
 

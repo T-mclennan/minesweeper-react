@@ -7,8 +7,8 @@ const initialState = {
     height: 10,
     mines: 10,
     isSfx: true,
-    animate: true,
-    theme: 'orange',
+    animation: true,
+    theme: true,
   },
 };
 
@@ -39,6 +39,12 @@ export const GlobalProvider = ({ children }) => {
     });
   }
 
+  function toggleAnimation() {
+    dispatch({
+      type: 'TOGGLE_ANIMATION',
+    });
+  }
+
   return (
     <GlobalContext.Provider
       value={{
@@ -46,6 +52,7 @@ export const GlobalProvider = ({ children }) => {
         setGameParams,
         toggleSound,
         toggleTheme,
+        toggleAnimation,
       }}
     >
       {children}

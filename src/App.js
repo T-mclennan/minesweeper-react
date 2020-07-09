@@ -6,6 +6,7 @@ import { Route, Switch } from 'react-router-dom';
 import history from './history';
 import Landing from './pages/Landing';
 import Scoreboard from './pages/Scoreboard';
+import Settings from './pages/Settings';
 import NotFound from './pages/NotFound';
 import { GlobalProvider, GlobalContext } from './context/GlobalState';
 import { isMobile } from 'react-device-detect';
@@ -21,6 +22,7 @@ function App() {
             <Route exact path='/'>
               <Landing />
             </Route>
+
             <Route exact path='/play'>
               <GlobalContext.Consumer>
                 {({ gameParams }) => <Game gameParams={gameParams} />}
@@ -30,6 +32,11 @@ function App() {
             <Route exact path='/scores'>
               <Scoreboard />
             </Route>
+
+            <Route exact path='/settings'>
+              <Settings />
+            </Route>
+
             <Route>
               <NotFound />
             </Route>
