@@ -5,9 +5,13 @@
   flex-direction: column;
   justify-content: center;
   /* background-color: rgb(35, 66, 122); */
-  background: #ff5f6d; /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #ffc371, #ff5f6d);
-  background: linear-gradient(to right, #ffc371, #ff5f6d);
+
+  /* background: #ff5f6d;
+  background: -webkit-linear-gradient(to right, #fac06d, #ff5f6d);
+  background: linear-gradient(to right, #ffc26c, #ff5f6d); */
+  /* background: #0099ff;
+  background: -webkit-linear-gradient(to right, #92ebff, #0099ff);
+  background: linear-gradient(to right, #92ebff, #0099ff); */
 
   height: 100%;
   width: 100%;

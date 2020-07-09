@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import Game from './components/Game/Game';
 import { Router } from 'react-router';
 import { Route, Switch } from 'react-router-dom';
@@ -8,14 +8,14 @@ import Landing from './pages/Landing';
 import Scoreboard from './pages/Scoreboard';
 import Settings from './pages/Settings';
 import NotFound from './pages/NotFound';
+import { BackgroundWrapper } from './components/BackgroundWrapper';
 import { GlobalProvider, GlobalContext } from './context/GlobalState';
 import { isMobile } from 'react-device-detect';
-import './stylesheets/App.css';
 
 function App() {
   return (
-    <div className='App'>
-      <GlobalProvider>
+    <GlobalProvider>
+      <BackgroundWrapper>
         <Router history={history}>
           {isMobile ? history.push('/Wrong-Device') : ''}
           <Switch>
@@ -42,8 +42,8 @@ function App() {
             </Route>
           </Switch>
         </Router>
-      </GlobalProvider>
-    </div>
+      </BackgroundWrapper>
+    </GlobalProvider>
   );
 }
 

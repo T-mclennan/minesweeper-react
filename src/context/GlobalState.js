@@ -8,7 +8,7 @@ const initialState = {
     mines: 10,
     isSfx: true,
     animation: true,
-    theme: true,
+    theme: false,
   },
 };
 

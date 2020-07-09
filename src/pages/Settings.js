@@ -25,20 +25,41 @@ const Settings = () => {
         <div style={innerContainer}>
           <div style={switchRow}>
             <Switch
+              height={30}
               id='animation'
               checked={animation}
               onChange={toggleAnimation}
+              onColor={'#044BA8'}
+              // offColor={'#FF946C'}
+              checkedIcon={false}
             />
             <h5 style={label}>Animations</h5>
           </div>
-
           <div style={switchRow}>
-            <Switch id='sfx' checked={isSfx} onChange={toggleSound} />
+            <Switch
+              height={30}
+              id='sfx'
+              checked={isSfx}
+              onColor={'#044BA8'}
+              // offColor={'#FF946C'}
+              checkedIcon={false}
+              onChange={toggleSound}
+            />
             <h5 style={label}>Game Sound Effects</h5>
           </div>
-
           <div style={switchRow}>
-            <Switch id='theme' checked={theme} onChange={toggleTheme} />
+            <Switch
+              height={30}
+              id='theme'
+              checked={theme}
+              onColor={'#0099FF'}
+              offColor={'#FF946C'}
+              checkedIcon={false}
+              uncheckedIcon={false}
+              //TODO: off color: orange
+              // default to off
+              onChange={toggleTheme}
+            />
             <h5 style={label}>Game Color Palette</h5>
           </div>
           <div style={buttonRow}>
@@ -91,10 +112,18 @@ const innerContainer = {
 const label = {
   fontSize: '1.6rem',
   marginLeft: '2rem',
+  color: '#0e1a49',
 };
 
 const buttonStyle = {
-  width: '20rem',
+  height: '3.2rem',
+  width: '22rem',
+  fontWeight: 'bold',
+  backgroundColor: '#0e1a49',
+  border: '1px solid #ffd79c',
+  borderRadius: '1rem',
+  margin: 'auto',
+  marginTop: '0.5rem',
 };
 
 export default Settings;
