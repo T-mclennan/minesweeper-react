@@ -10,6 +10,9 @@ import { getScores, cleanScores } from '../../actions/scoring';
 import InfoBar from '../InfoBar/InfoBar';
 import UIfx from 'uifx';
 import boom from '../../assets/audio/explosion.mp3';
+import ding from '../../assets/audio/weak-pulse.flac';
+import chime from '../../assets/audio/ping.wav';
+
 import './Game.css';
 
 export default class Game extends Component {
@@ -27,9 +30,17 @@ export default class Game extends Component {
       playing: false,
       finalCell: {},
       score: 0,
-      sfx: new UIfx(boom, {
-        volume: 0.4,
-      }),
+      sfx: {
+        boom: new UIfx(boom, {
+          volume: 0.4,
+        }),
+        ding: new UIfx(ding, {
+          volume: 0.4,
+        }),
+        chime: new UIfx(ding, {
+          volume: 0.4,
+        }),
+      },
       showModal: false,
       intro: false,
       countDown: 3,
@@ -40,8 +51,10 @@ export default class Game extends Component {
   static contextType = GlobalContext;
 
   componentDidMount() {
-    this.beginGame();
     const { animation, isSfx, theme } = this.context.gameParams;
+    if (isSfx) {
+      this.state.sfx.ding.play();
+    }
     this.setState({
       settings: {
         animation,
@@ -49,6 +62,7 @@ export default class Game extends Component {
         theme,
       },
     });
+    this.beginGame();
   }
 
   componentWillUnmount() {
@@ -86,7 +100,7 @@ export default class Game extends Component {
 
       if (isMine) {
         if (this.state.settings.isSfx) {
-          sfx.play();
+          sfx.boom.play();
         }
         this.setState({
           gameStatus: 'Game over, you lost!',
@@ -232,10 +246,16 @@ export default class Game extends Component {
 
   beginGame = () => {
     this.setState({ playing: false, intro: true, countDown: 3 });
+    if (this.state.settings.isSfx) {
+      this.state.sfx.ding.play();
+    }
     this.myInterval = setInterval(() => {
-      const { countDown } = this.state;
+      const { countDown, sfx, settings } = this.state;
 
       if (countDown > 1) {
+        if (settings.isSfx) {
+          sfx.ding.play();
+        }
         this.setState(({ countDown }) => ({
           countDown: countDown - 1,
         }));
