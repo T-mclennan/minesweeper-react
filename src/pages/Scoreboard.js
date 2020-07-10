@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Table } from 'reactstrap';
 import CountUp from 'react-countup';
 import history from '../history';
+import { GlobalContext } from '../context/GlobalState';
+import AppTheme from '../context/ThemeColors';
 
 import { getScores, cleanScores } from '../actions/scoring';
 import '../stylesheets/Scoreboard.css';
@@ -9,6 +11,10 @@ import '../stylesheets/Scoreboard.css';
 const Scoreboard = () => {
   const [scores, setScores] = useState([]);
   const [isLoading, setLoading] = useState(false);
+
+  const { gameParams } = useContext(GlobalContext);
+
+  const { primary, accent } = AppTheme[gameParams.theme ? 'blue' : 'orange'];
 
   useEffect(() => {
     async function onLoad() {
@@ -54,7 +60,7 @@ const Scoreboard = () => {
   return !isLoading ? (
     <div className='standings-page' onClick={() => handleClick()}>
       <h2 className='header'>Top Players:</h2>
-      <div style={outerScoreContainer}>
+      <div style={{ ...outerScoreContainer, border: `1px double ${accent}` }}>
         <div style={innerScoreContainer}>
           <Table
             className='standings'
@@ -82,7 +88,6 @@ const Scoreboard = () => {
 
 const outerScoreContainer = {
   height: '85%',
-  border: '1px double #ffd79c',
   padding: '2rem',
   borderRadius: '2rem',
   margin: 'auto',

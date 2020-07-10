@@ -30,8 +30,8 @@ a {
 .icon {
   margin: 0 2rem;
   color: #0e1a49;
-  stroke: #f5ddb9;
-  stroke-width: 8;
+  stroke-width: 7;
+  outline: none;
   transform: scale(1.4);
   transition-property: transform, color;
   transition-duration: 0.25s;

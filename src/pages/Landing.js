@@ -7,22 +7,12 @@ import {
   UncontrolledTooltip,
 } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faGithubAlt,
-  faGithubSquare,
-} from '@fortawesome/free-brands-svg-icons';
-import {
-  faViruses,
-  faCog,
-  faUserCog,
-  faQuestionCircle,
-} from '@fortawesome/free-solid-svg-icons';
-import {
-  faListAlt,
-  // faQuestionCircle,
-} from '@fortawesome/free-regular-svg-icons';
+import { faGithubAlt } from '@fortawesome/free-brands-svg-icons';
+import { faViruses, faUserCog } from '@fortawesome/free-solid-svg-icons';
+import { faListAlt } from '@fortawesome/free-regular-svg-icons';
 import history from '../history';
 import { GlobalContext } from '../context/GlobalState';
+import AppTheme from '../context/ThemeColors';
 import '../stylesheets/Landing.css';
 
 const Landing = () => {
@@ -30,8 +20,10 @@ const Landing = () => {
   const [mines, setMines] = useState(10);
   const [width, setWidth] = useState(10);
   const [height, setHeight] = useState(10);
-  const { setGameParams } = useContext(GlobalContext);
+  const { gameParams, setGameParams } = useContext(GlobalContext);
 
+  const themeColor = gameParams.theme ? 'blue' : 'orange';
+  const { primary, accent } = AppTheme[themeColor];
   const createSelectItems = (min, max) => {
     let items = [];
     for (let i = min; i <= max; i++) {
@@ -103,7 +95,10 @@ const Landing = () => {
         <h2>Covid Sweeper</h2>
       </div>
       <div style={FormContainer}>
-        <form onSubmit={onSubmitHandler} style={Form}>
+        <form
+          onSubmit={onSubmitHandler}
+          style={{ ...Form, border: `1px double ${accent}` }}
+        >
           <FormGroup style={InputRow}>
             <Label for='difficulty' sm={2} style={LabelStyle}>
               Difficulty:
@@ -176,27 +171,34 @@ const Landing = () => {
             </Input>
           </FormGroup>
 
-          <Button style={ButtonStyle}>
-            <h4>Play Now!</h4>
+          <Button
+            style={{
+              ...ButtonStyle,
+              backgroundColor: primary,
+              border: `1px solid ${accent}`,
+              color: accent,
+            }}
+          >
+            Play Now!
           </Button>
         </form>
       </div>
       <div style={FooterContainer} className='footer'>
         <div style={Footer} className='content'>
-          <a href={'/scores'} id='scoreboard'>
-            <FontAwesomeIcon
-              icon={faListAlt}
-              // style={Icon}
-              className='icon far fa-2x fa-in'
-            />
-            <UncontrolledTooltip
-              style={tooltip}
-              placement='bottom'
-              target='scoreboard'
-            >
-              Scoreboard
-            </UncontrolledTooltip>
-          </a>
+          <FontAwesomeIcon
+            icon={faListAlt}
+            style={{ stroke: accent }}
+            className={`icon far fa-2x fa-in `}
+            id='scoreboard'
+            onClick={() => history.push(`/scores`)}
+          />
+          <UncontrolledTooltip
+            style={tooltip}
+            placement='bottom'
+            target='scoreboard'
+          >
+            Scoreboard
+          </UncontrolledTooltip>
 
           {/* <a href={'/scores'} id='information'>
             <FontAwesomeIcon
@@ -212,26 +214,27 @@ const Landing = () => {
             </UncontrolledTooltip>
           </a> */}
 
-          <a href={'/settings'} id='settings'>
-            <FontAwesomeIcon
-              icon={faUserCog}
-              style={{ fontSize: '1.75rem' }}
-              className='icon far fa-lg fa-in'
-            />
-            <UncontrolledTooltip
-              style={tooltip}
-              placement='bottom'
-              target='settings'
-            >
-              Settings
-            </UncontrolledTooltip>
-          </a>
+          <FontAwesomeIcon
+            icon={faUserCog}
+            style={{ fontSize: '1.75rem', stroke: accent }}
+            className={`icon far fa-lg fa-in ${themeColor}`}
+            id='settings'
+            onClick={() => history.push(`/settings`)}
+          />
+          <UncontrolledTooltip
+            style={tooltip}
+            placement='bottom'
+            target='settings'
+          >
+            Settings
+          </UncontrolledTooltip>
 
-          <a href={'https://www.github.com/T-mclennan'} id='github'>
+          <a href={'https://www.github.com/T-mclennan'}>
             <FontAwesomeIcon
               icon={faGithubAlt}
-              style={{ fontSize: '2.2rem' }}
-              className='icon far fa-2x fa-in'
+              style={{ fontSize: '2.2rem', stroke: accent }}
+              className={`icon far fa-2x fa-in ${themeColor}`}
+              id='github'
             />
           </a>
           <UncontrolledTooltip
@@ -248,39 +251,34 @@ const Landing = () => {
   );
 };
 
-const Styling = {
-  backgroundImage:
-    'linear-gradient(to bottom, #0e1a49 0%, #red 30%,#002fa7 100%)',
+const Flex = {
   display: 'flex',
+  justifyContent: 'center',
+  alignContent: 'center',
+};
+
+const Styling = {
+  ...Flex,
   flexDirection: 'column',
   justifyContent: 'space-around',
-  alignContent: 'center',
   height: '100%',
 };
 
 const TitleContainer = {
-  display: 'flex',
+  ...Flex,
   flexDirection: 'row',
-  justifyContent: 'center',
-  alignContent: 'center',
   paddingRight: '3rem',
 };
 
 const FormContainer = {
-  display: 'flex',
+  ...Flex,
   flexDirection: 'column',
-  justifyContent: 'center',
-  alignContent: 'center',
 };
 
 const Form = {
-  display: 'flex',
+  ...Flex,
   flexDirection: 'column',
-  justifyContent: 'center',
-  alignContent: 'center',
   width: '30rem',
-  backgroundColor: 'hsl(204, 100%, 60%) 53%',
-  border: '1px double #ffd79c',
   borderRadius: '1rem',
   padding: '2rem',
   margin: 'auto',
@@ -306,24 +304,17 @@ const InputRow = {
 };
 
 const ButtonStyle = {
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  color: '#ffd79c',
   fontSize: '1rem',
   height: '3.2rem',
   width: '22rem',
   fontWeight: 'bold',
-  backgroundColor: '#0e1a49',
-  border: '1px solid #ffd79c',
   borderRadius: '1rem',
   margin: 'auto',
   marginTop: '0.5rem',
 };
 
 const FooterContainer = {
-  display: 'flex',
-  justifyContent: 'center',
+  ...Flex,
   height: '5rem',
   width: '100%',
 };
@@ -340,11 +331,9 @@ const tooltip = {
 };
 
 const Footer = {
-  display: 'flex',
+  ...Flex,
   // width: '24rem',
   width: '20rem',
-  justifyContent: 'center',
-  color: '#0e1a49',
 };
 
 export default Landing;
