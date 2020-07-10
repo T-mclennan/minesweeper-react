@@ -43,7 +43,7 @@ export default class Game extends Component {
       },
       showModal: false,
       intro: false,
-      countDown: 3,
+      countDown: 4,
       settings: {},
     };
   }
@@ -52,9 +52,6 @@ export default class Game extends Component {
 
   componentDidMount() {
     const { animation, isSfx, theme } = this.context.gameParams;
-    if (isSfx) {
-      this.state.sfx.ding.play();
-    }
     this.setState({
       settings: {
         animation,
@@ -245,10 +242,8 @@ export default class Game extends Component {
   };
 
   beginGame = () => {
-    this.setState({ playing: false, intro: true, countDown: 3 });
-    if (this.state.settings.isSfx) {
-      this.state.sfx.ding.play();
-    }
+    this.setState({ playing: false, intro: true, countDown: 4 });
+
     this.myInterval = setInterval(() => {
       const { countDown, sfx, settings } = this.state;
 
@@ -304,7 +299,13 @@ export default class Game extends Component {
             />
             {countDown > 0 && intro ? (
               <div style={countDownContainer}>
-                <h1 style={countdown}>{countDown}</h1>
+                {countDown === 4 ? (
+                  <h3 style={{ ...countdown, fontSize: '4rem' }}>
+                    Get Ready...
+                  </h3>
+                ) : (
+                  <h1 style={countdown}>{countDown}</h1>
+                )}
               </div>
             ) : (
               <Board

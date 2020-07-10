@@ -31,6 +31,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "predeploy": "npm run build",
+    "deploy": "aws s3 sync build/ s3://minesweeper-app-client --delete",
+    "postdeploy": "aws cloudfront create-invalidation --distribution-id E1UQ5H3YT7S82G --paths '/*'",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
