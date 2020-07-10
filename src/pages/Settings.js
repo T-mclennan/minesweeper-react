@@ -13,7 +13,6 @@ const Settings = () => {
   );
 
   const { animation, isSfx, theme } = gameParams;
-  console.log(`Settings - theme is: ${theme}`);
   const { primary, accent } = AppTheme[gameParams.theme ? 'blue' : 'orange'];
 
   const handleClick = () => {

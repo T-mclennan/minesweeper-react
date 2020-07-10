@@ -34,7 +34,6 @@ export default (state, action) => {
 
     case 'TOGGLE_ANIMATION':
       const { animation } = state.gameParams;
-      console.log(`inside reducer - animation: ${animation}`);
       return {
         ...state,
         gameParams: {

@@ -188,7 +188,7 @@ const Landing = () => {
           <FontAwesomeIcon
             icon={faListAlt}
             style={{ stroke: accent }}
-            className={`icon far fa-2x fa-in `}
+            className={`icon far fa-2x fa-in`}
             id='scoreboard'
             onClick={() => history.push(`/scores`)}
           />
@@ -229,7 +229,7 @@ const Landing = () => {
             Settings
           </UncontrolledTooltip>
 
-          <a href={'https://www.github.com/T-mclennan'}>
+          <a href={'https://github.com/T-mclennan/minesweeper-react'}>
             <FontAwesomeIcon
               icon={faGithubAlt}
               style={{ fontSize: '2.2rem', stroke: accent }}

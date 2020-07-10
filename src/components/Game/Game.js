@@ -33,6 +33,7 @@ export default class Game extends Component {
       showModal: false,
       intro: false,
       countDown: 3,
+      settings: {},
     };
   }
 
@@ -40,6 +41,14 @@ export default class Game extends Component {
 
   componentDidMount() {
     this.beginGame();
+    const { animation, isSfx, theme } = this.context.gameParams;
+    this.setState({
+      settings: {
+        animation,
+        isSfx,
+        theme,
+      },
+    });
   }
 
   componentWillUnmount() {
@@ -76,7 +85,9 @@ export default class Game extends Component {
       if (isVisible || isFlagged) return null;
 
       if (isMine) {
-        sfx.play();
+        if (this.state.settings.isSfx) {
+          sfx.play();
+        }
         this.setState({
           gameStatus: 'Game over, you lost!',
           playing: false,

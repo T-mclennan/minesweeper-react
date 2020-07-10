@@ -1,17 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { tada } from 'react-animations';
 import Radium, { StyleRoot } from 'radium';
 import Cell from '../Cell/Cell';
+import { GlobalContext } from '../../context/GlobalState';
 
 const Board = ({ board, over }) => {
-  const animationStyle = over
-    ? {
-        animation: 'x 0.3s',
-        animationName: Radium.keyframes(tada, 'tada'),
-        borderColor: 'rgba(128,0,128, 0.6aw)',
-        boxShadow: 'inset 0px 0px 0px 4px rgba(128,0,128, 0.2)',
-      }
-    : {};
+  const { gameParams } = useContext(GlobalContext);
+  const animationStyle =
+    over && gameParams.animation
+      ? {
+          animation: 'x 0.3s',
+          animationName: Radium.keyframes(tada, 'tada'),
+          borderColor: 'rgba(128,0,128, 0.6aw)',
+          boxShadow: 'inset 0px 0px 0px 4px rgba(128,0,128, 0.2)',
+        }
+      : {};
 
   return (
     <StyleRoot>
