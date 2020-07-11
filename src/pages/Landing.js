@@ -229,12 +229,14 @@ const Landing = () => {
             Settings
           </UncontrolledTooltip>
 
-          <a href={'https://github.com/T-mclennan/minesweeper-react'}>
+          <a
+            href={'https://github.com/T-mclennan/minesweeper-react'}
+            id='github'
+          >
             <FontAwesomeIcon
               icon={faGithubAlt}
               style={{ fontSize: '2.2rem', stroke: accent }}
               className={`icon far fa-2x fa-in ${themeColor}`}
-              id='github'
             />
           </a>
           <UncontrolledTooltip

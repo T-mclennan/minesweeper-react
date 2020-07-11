@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Clock from '../Clock/Clock';
 import { Button } from 'reactstrap';
-import refreshGame from '../Game/Game';
 import './InfoBar.css';
 import history from '../../history';
 
@@ -53,7 +52,6 @@ const barStyle = {
 
 const container = {
   display: 'flex',
-  color: '#0e2754',
   flexDirection: 'row',
   justifyContent: 'center',
   alignContent: 'center',
@@ -61,12 +59,12 @@ const container = {
 
 const statusContainer = {
   ...container,
-  flex: 4,
+  flex: 5,
 };
 
 const ButtonContainer = {
   ...container,
-  flex: 5,
+  flex: 4,
 };
 
 const clockContainer = {

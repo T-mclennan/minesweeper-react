@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import history from '../../history';
-import LoaderButton from './LoaderButton';
 import { addScore } from '../../actions/scoring';
 import {
   Button,
@@ -49,12 +48,11 @@ export const HighScoreModal = ({ score, toggle, modal }) => {
         <ModalBody style={modalBody}>
           <Form style={formStyle} onSubmit={submitScore}>
             <FormGroup style={{ margin: 'auto' }}>
-              <Label for='username'>Please enter a username:</Label>
               <Input
                 type='text'
                 name='username'
                 id='username'
-                placeholder='myName1234'
+                placeholder='Enter Username...'
                 maxLength='12'
                 style={inputStyle}
                 onChange={(e) => onChangeHandler(e)}
@@ -77,14 +75,16 @@ export const HighScoreModal = ({ score, toggle, modal }) => {
 
 const modalStyle = {
   width: '36rem',
-  borderRadius: '0.5rem',
 };
 
 const buttonStyle = {
-  width: '28rem',
+  width: '28.1rem',
   height: '3.5rem',
   margin: '1rem auto',
-  borderRadius: '0.5rem',
+  fontWeight: 'bold',
+  fontSize: '1.1rem',
+  borderRadius: '1rem',
+  backgroundColor: '#0e1a49',
 };
 
 const modalBody = {
@@ -96,6 +96,7 @@ const modalHeader = {
   display: 'flex',
   justifyContent: 'center',
   padding: '0 2rem',
+  borderRadius: '1rem',
 };
 
 const formStyle = {
@@ -104,12 +105,15 @@ const formStyle = {
   flexDirection: 'column',
   justifyContent: 'space-around',
   alignContent: 'center',
+  padding: '1.8rem',
 };
 
 const inputStyle = {
   width: '28rem',
-  height: '2.5rem',
+  height: '3rem',
   borderRadius: '0.5rem',
+  fontSize: '1.3rem',
+  marginBottom: '0.5rem',
 };
 
 export default HighScoreModal;

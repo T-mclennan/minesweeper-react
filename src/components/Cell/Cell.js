@@ -1,12 +1,15 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import GameContext from '../Game/GameContext';
+import AppTheme from '../../context/ThemeColors';
+
 import corona from '../../assets/mines/purple-mine.png';
 import foundCorona from '../../assets/mines/red-mine.png';
 import flag from '../../assets/flags/red-flag.png';
 import './Cell.css';
 
-const Cell = (props) => {
+const Cell = ({ data, theme }) => {
   const gameState = useContext(GameContext);
+  const { primary, accent, cellColor } = AppTheme[theme ? 'blue' : 'orange'];
 
   const {
     rightClickHandler,
@@ -14,7 +17,15 @@ const Cell = (props) => {
     doubleClickHandler,
     finalCell,
   } = gameState;
-  const { isMine, isFlagged, isVisible, neighborCount, x, y } = props.data;
+  const {
+    isMine,
+    isFlagged,
+    isRevealed,
+    isVisible,
+    neighborCount,
+    x,
+    y,
+  } = data;
 
   const generateContent = () => {
     let content = null;
@@ -72,7 +83,7 @@ const Cell = (props) => {
   };
 
   const generateStyle = () => {
-    const { isVisible, neighborCount, isFlagged, isRevealed } = props.data;
+    // const { isVisible, neighborCount, isFlagged, isRevealed } = props.data;
 
     if (isFlagged) {
       return { ...coveredStyle, color: 'red', fontSize: '1.8rem' };
@@ -80,11 +91,14 @@ const Cell = (props) => {
       return {
         ...seenCell,
         backgroundColor: 'rgb(242, 171, 163)',
-        // border: '2px solid rgb(186, 34, 17)',
+        background: `-webkit-radial-gradient(rgba(248, 9, 69, 0.8), rgba(248, 9, 69, 0.4), ${cellColor})`,
         border: '1px solid rgb(248, 9, 69)',
       };
     } else if (isRevealed) {
-      return { ...seenCell, backgroundColor: '#EADBD7' };
+      return {
+        ...seenCell,
+        backgroundColor: cellColor,
+      };
     } else if (isVisible && neighborCount > 0) {
       return { ...seenCell, color: generateColor(neighborCount) };
     } else if (isVisible && neighborCount === 0) {
@@ -118,8 +132,6 @@ const cellStyle = {
   justifyContent: 'center',
   flexDirection: 'column',
   textAlign: 'center',
-  // transitionProperty: 'all',
-  // transitionDuration: '0.02s',
 };
 
 const coveredStyle = {

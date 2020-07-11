@@ -11,9 +11,10 @@ import InfoBar from '../InfoBar/InfoBar';
 import UIfx from 'uifx';
 import boom from '../../assets/audio/explosion.mp3';
 import ding from '../../assets/audio/weak-pulse.flac';
-import chime from '../../assets/audio/ping.wav';
+import fanfare from '../../assets/audio/success-fanfare-trumpets.mp3';
 
 import './Game.css';
+import StyledConfetti from '../Score/StyledConfetti';
 
 export default class Game extends Component {
   constructor(props) {
@@ -37,7 +38,7 @@ export default class Game extends Component {
         ding: new UIfx(ding, {
           volume: 0.4,
         }),
-        chime: new UIfx(ding, {
+        fanfare: new UIfx(fanfare, {
           volume: 0.4,
         }),
       },
@@ -211,13 +212,17 @@ export default class Game extends Component {
 
   endGame = (elapsed) => {
     if (this.state.gameStatus === 'You win!') {
-      const { width, height } = this.state;
-      const { mines } = this.props.match.params;
+      const { mines, width, height } = this.props.gameParams;
+      const { settings, sfx } = this.state;
       const score = generateScore(elapsed, width, height, mines);
       this.setState({
         score: score,
         gameStatus: `You win! Score is: ${score}`,
       });
+
+      if (settings.isSfx) {
+        sfx.fanfare.play();
+      }
 
       if (this.checkHighScore(score)) {
         this.setState({ showModal: true });
@@ -225,12 +230,7 @@ export default class Game extends Component {
     }
   };
 
-  //checkHighScore: Fetches high score data, returns True if current score is in top 10:
-  //Input: Int
-  //Output: Boolean
   checkHighScore = async (score) => {
-    // console.log(mockScores);
-
     const allScores = await getScores();
     const totalScores = cleanScores(allScores);
     const lowestHighScore = totalScores.pop();
@@ -297,6 +297,7 @@ export default class Game extends Component {
               toggle={this.toggleModal}
               modal={showModal}
             />
+            <StyledConfetti status={gameStatus === 'You win!'} />
             {countDown > 0 && intro ? (
               <div style={countDownContainer}>
                 {countDown === 4 ? (

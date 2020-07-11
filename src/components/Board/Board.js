@@ -32,7 +32,11 @@ const Board = ({ board, over }) => {
               <div key={i} style={rowStyle}>
                 {row.map((item) => {
                   return (
-                    <Cell key={item.x * row.length + item.y} data={item} />
+                    <Cell
+                      key={item.x * row.length + item.y}
+                      data={item}
+                      theme={gameParams.theme}
+                    />
                   );
                 })}
               </div>

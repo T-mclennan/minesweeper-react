@@ -21,6 +21,9 @@ export const GlobalProvider = ({ children }) => {
 
   //Actions:
   function setGameParams(params) {
+    console.log('inside SetGameParams');
+    console.log(params);
+
     dispatch({
       type: 'SET_GAME_PARAMS',
       payload: params,

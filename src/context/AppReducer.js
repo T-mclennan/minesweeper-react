@@ -5,10 +5,10 @@ export default (state, action) => {
       return {
         ...state,
         gameParams: {
+          ...state.gameParams,
           height,
           width,
           mines,
-          ...state.gameParams,
         },
       };
 
