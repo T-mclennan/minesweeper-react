@@ -37,10 +37,14 @@
     
 - ## Scoreboard: 
   Displays a table listing of the top 10 player standings.
+  
+  <img width="1280" alt="scoreboard" src="https://user-images.githubusercontent.com/43154475/87493057-d12e6600-c600-11ea-8f76-436975e4d519.png">
 
              
 - ## Settings:
+  This page offers toggle options for sound effects, animation, and color scheme:
 
+<img width="1279" alt="settings" src="https://user-images.githubusercontent.com/43154475/87493070-d8557400-c600-11ea-80f3-fa23e0c7fb6e.png">
              
 - ## Gameplay:
-
+<img width="1280" alt="game-blue" src="https://user-images.githubusercontent.com/43154475/87493022-bf4cc300-c600-11ea-8b8d-903ccf056d41.png">
