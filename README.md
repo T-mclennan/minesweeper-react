@@ -32,8 +32,7 @@
     grow and change the color of icons on hover, as well as adding descriptive tooltip.
     Here is the landing page as seen in both orange and blue color schemes:
     
-    <img width="1279" alt="Landing-orange" src="https://user-images.githubusercontent.com/43154475/87493049-cc69b200-c600-11ea-8840-64bd16adfa64.png">
-    <img width="1280" alt="Landing-blue" src="https://user-images.githubusercontent.com/43154475/87493034-c378e080-c600-11ea-9425-4134418f91e1.png">
+![2020-07-15 14 55 27](https://user-images.githubusercontent.com/43154475/87602562-1196ee00-c6ac-11ea-931b-3f2c1297fc90.gif)
     
 - ## Scoreboard: 
   Displays a table listing of the top 10 player standings.
