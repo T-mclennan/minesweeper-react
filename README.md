@@ -27,7 +27,14 @@
  
 
 - ## Landing: 
-
+    Featured in the middle of the page are game options players can use to generate a new game. They can choose between standard difficulty combinations,
+    or build a game with custom parameters. Below this form are icons linking to the scoreboard, settings page, and github. Animation is added to 
+    grow and change the color of icons on hover, as well as adding descriptive tooltip.
+    Here is the landing page as seen in both orange and blue color schemes:
+    
+    <img width="1279" alt="Landing-orange" src="https://user-images.githubusercontent.com/43154475/87493049-cc69b200-c600-11ea-8840-64bd16adfa64.png">
+    <img width="1280" alt="Landing-blue" src="https://user-images.githubusercontent.com/43154475/87493034-c378e080-c600-11ea-9425-4134418f91e1.png">
+    
 - ## Scoreboard: 
   Displays a table listing of the top 10 player standings.
 
