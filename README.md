@@ -1,4 +1,4 @@
-# Covid-Sweeper: A minesweeper clone built with serverless AWS backend
+# Covid-Sweeper: A minesweeper clone with serverless AWS backend
 
   ### Click [here](https://covid-sweeper.com/) to try it out!
  
