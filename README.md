@@ -13,7 +13,7 @@
     - CloudWatch is used for Lambda and API access logs. 
     
   ##### Frontend:
-    - The game has customizable parameters and layout, 3 kinds of mouse input. 
+    - The game has customizable parameters and layout, 3 kinds of mouse input. (right, left, and double click)
     - The Landing, Settings, Game, and Standings pages were built with React and CSS.
     - AWS Amplify is used to connect with backend resources.
     - Jest & React-Testing-Library for unit testing. 
@@ -43,7 +43,7 @@
 - ## Settings:
   This page offers toggle options for sound effects, animation, and color scheme:
 
-<img width="1279" alt="settings" src="https://user-images.githubusercontent.com/43154475/87493070-d8557400-c600-11ea-80f3-fa23e0c7fb6e.png">
+  ![2020-07-15 15 19 04](https://user-images.githubusercontent.com/43154475/87606118-10b38b80-c6af-11ea-9daa-f509177a2ec5.gif)
              
 - ## Gameplay:
 <img width="1280" alt="game-blue" src="https://user-images.githubusercontent.com/43154475/87493022-bf4cc300-c600-11ea-8b8d-903ccf056d41.png">
