@@ -1,27 +1,24 @@
-# Covid-Sweeper: A serverless minesweeper project 
+# Covid-Sweeper: A minesweeper clone built with serverless AWS backend
 
   ### Click [here](https://covid-sweeper.com/) to try it out!
- 
- ---
  
 - ## Tools and Architecture: 
     This project was chosen to give practice with the AWS ecosystem, and was aided by the use of the [Serverless Stack](http://serverless-stack.com) guide.
  
-  ##### Backend:
-    - Node.js and express are used for server logic and route handling 
-    - MongoDB atlas used with Mongoose for storage
+  ##### Backend: 
+    - The application and database are deployed as separate services, with the API repo found [here](https://github.com/T-mclennan/minesweeper-serverless-api).
+    - CloudFormation template is generated and deployed using Serverless.
+    - Static assets are hosted in S3 bucket, served by CloudFront with an AWS Lambda trigger. 
+    - DynamoDB is used for storage, accessed via API Gateway, and protected by Cognito.
+    - CloudWatch is used for Lambda and API access logs. 
     
   ##### Frontend:
-    - Components are created with React, Reactstrap and CSS 
-    - JWT and Local Storage are used for Authentication and player permissions
-    - Redux is used for application level state management of Authentication, Player, Game, and Error data
-    - Axios is used for server requests
-    - React Router Dom is used for client-side routing
-    - Socket.io is used as websocket for gameplay and player display in lobby
-   
-  ##### Game Tools: 
-    - [Chess.js](https://github.com/jhlywa/chess.js/) is used for move validation
-    - [Chessboard.jsx](https://github.com/willb335/chessboardjsx/) is used for the game board
+    - The game has customizable parameters and layout, 3 kinds of mouse input. 
+    - The Landing, Settings, Game, and Standings pages were built with React and CSS.
+    - AWS Amplify is used to connect with backend resources.
+    - Jest & React-Testing-Library for unit testing. 
+    - useContext hook and Context API share theme and settings between components.
+    - Routing is done with the ReactRouter and history API.
       
 - ## Authentication:
     Whena player logs in a JSON webtoken is created for the session and is stored in local storage of the browser. 
