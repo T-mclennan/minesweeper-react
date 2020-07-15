@@ -1,68 +1,84 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Covid-Sweeper: A serverless minesweeper project 
 
-## Available Scripts
+  ### Explore project [here](www.covid-sweeper.com) 
+ 
+ ---
+ 
+- ## Tools and Architecture: 
+    This project was chosen to give practice with the AWS ecosystem, and was aided by the use of the [Serverless Stack](http://serverless-stack.com) guide.
+ 
+  ##### Backend:
+    - Node.js and express are used for server logic and route handling 
+    - MongoDB atlas used with Mongoose for storage
+    
+  ##### Frontend:
+    - Components are created with React, Reactstrap and CSS 
+    - JWT and Local Storage are used for Authentication and player permissions
+    - Redux is used for application level state management of Authentication, Player, Game, and Error data
+    - Axios is used for server requests
+    - React Router Dom is used for client-side routing
+    - Socket.io is used as websocket for gameplay and player display in lobby
+   
+  ##### Game Tools: 
+    - [Chess.js](https://github.com/jhlywa/chess.js/) is used for move validation
+    - [Chessboard.jsx](https://github.com/willb335/chessboardjsx/) is used for the game board
+      
+- ## Authentication:
+    Whena player logs in a JSON webtoken is created for the session and is stored in local storage of the browser. 
+    When a player logs out this is cleared. This gives the player the ability to maintain a session and not have to log 
+    in every visit, unless they explicitly log out. This feature is currently disabled so that players can open multiple tabs
+    and play themselves, as a demonstration of the app.
+ 
 
-In the project directory, you can run:
+- ## Lobby: 
 
-### `npm start`
+    Left sidebar has game options: Dashboard, Quickplay, Findgame, Standings
+    Right sidebar has player list, with green for currently logged in players
+  
+  <img width="1280" alt="Lobby" src="https://user-images.githubusercontent.com/43154475/74298059-84ff9280-4cfd-11ea-93d2-6a30c6739d99.png">
+   
+- ## Dashboard: 
+     If the player has no games pending, the Dashboard welcomes the player and provides information.
+     Otherwise the dashboard has a listing of current games to re-open.
+             
+- ## Quickplay:
+   Joins the most recently created open game.
+   If none is available it will create and open a default game.
+             
+- ## Findgame: 
+     Displays a table listing of all the open games that are possible to join
+     Clicking on a listing will join and open that game. 
+            
+- ## Standings: 
+     Displays a table listing of the top 10 player standings. 
+             
+  
+   Future releases will add interactivity for the list of players on the right side: the ability to click a players name and
+   challenge them, or open a chat modal. 
+  
+  
+- ## Gameplay:
+   When any game event happens such as a player joining, a move being made, etc. the information is bundled and sent to the
+   server, which broadcasts it to other players in the game. Many events also coincide with dispatching a redux action to save
+   the game state into the store as well as an API call to save the information in the servers database. 
+   
+   <img width="1280" alt="Game" src="https://user-images.githubusercontent.com/43154475/74298052-7f09b180-4cfd-11ea-9155-c3e02eb56dec.png">
+   
+   The game status is checked during the initial load, as well as after each move. Possible status could show a player in
+   check or checkmate, a stalemate position, draw from three-fold repetition. If the game is over a modal will pop up 
+   displaying the status and the winner of the match. 
+   
+   Future development of the game will include the addition of a scoring algorithm for rated games, the implementation of a
+   time clock, and the addition of castling. (Not currently supported by our chess engine for 960)
+   
+ - ## Inspiration:
+    Chess 960 is a variation of [Fischer Random](https://en.wikipedia.org/wiki/Fischer_random_chess), where the back row of pieces is randomized to encourage improvised play.
+    However, because true randomization would lead to many board positions that are far out of balance, the board is 
+    constructed according to the following conditions:
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+    - Both players have identical configurations at the start of the game. 
+    - Each player is first given a black and white bishop in random position.
+    - The queen is placed in one of the remaining 6 squares.
+    - The black and white knight are played randomly in the remaining 5 and 4 squares.
+    - With the 3 remaining squares, the king goes in the middle with the rooks on each side,
+      which allows for castling in both directions. Once the start position is generated, it is passed as fen notation into both the board and game logic. 
