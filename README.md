@@ -1,6 +1,6 @@
 # Covid-Sweeper: A serverless minesweeper project 
 
-  ### Click [here](www.covid-sweeper.com) to try it out!
+  ### Click [here](https://covid-sweeper.com/) to try it out!
  
  ---
  
