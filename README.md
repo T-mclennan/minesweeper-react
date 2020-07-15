@@ -31,8 +31,9 @@
     or build a game with custom parameters. Below this form are icons linking to the scoreboard, settings page, and github. Animations are added to 
     change color and size of icons on hover, as well as adding descriptive tooltip. 
     
+    ![2020-07-15 14 55 27](https://user-images.githubusercontent.com/43154475/87602562-1196ee00-c6ac-11ea-931b-3f2c1297fc90.gif)
     
-![2020-07-15 14 55 27](https://user-images.githubusercontent.com/43154475/87602562-1196ee00-c6ac-11ea-931b-3f2c1297fc90.gif)
+
     
 - ## Scoreboard: 
     Displays a table listing of the current high scores. 
@@ -62,5 +63,5 @@
   - Jiggling animation is added when a player loses. Confetti animation is added when a player wins. 
   - If the player recieves a score in the top 10, he is prompted for a username in a highscore modal, then routed to the scoreboard page. 
   
-  
-<img width="1280" alt="game-blue" src="https://user-images.githubusercontent.com/43154475/87493022-bf4cc300-c600-11ea-8b8d-903ccf056d41.png">
+  <img width="1280" alt="game-blue" src="https://user-images.githubusercontent.com/43154475/87493022-bf4cc300-c600-11ea-8b8d-903ccf056d41.png">
+
