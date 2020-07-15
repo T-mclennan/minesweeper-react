@@ -28,22 +28,39 @@
 
 - ## Landing: 
     Featured in the middle of the page are game options players can use to generate a new game. They can choose between standard difficulty combinations,
-    or build a game with custom parameters. Below this form are icons linking to the scoreboard, settings page, and github. Animation is added to 
-    grow and change the color of icons on hover, as well as adding descriptive tooltip.
-    Here is the landing page as seen in both orange and blue color schemes:
+    or build a game with custom parameters. Below this form are icons linking to the scoreboard, settings page, and github. Animations are added to 
+    change color and size of icons on hover, as well as adding descriptive tooltip. 
+    
     
 ![2020-07-15 14 55 27](https://user-images.githubusercontent.com/43154475/87602562-1196ee00-c6ac-11ea-931b-3f2c1297fc90.gif)
     
 - ## Scoreboard: 
-  Displays a table listing of the top 10 player standings.
+    Displays a table listing of the current high scores. 
+    Amplify is used to query the DynamoDB table, and we use a scan operation with a limit to get the top 10. 
+    Countup library is used to add scroll effect, with the animation time set in relation to the score value. (higher score counts longer)
   
   <img width="1280" alt="scoreboard" src="https://user-images.githubusercontent.com/43154475/87493057-d12e6600-c600-11ea-8f76-436975e4d519.png">
 
              
 - ## Settings:
-  This page offers toggle options for sound effects, animation, and color scheme:
+  This page offers toggle options for sound effects, animation, and color scheme.
+  These preferences are stored in global state using Context API, so they can be easily accessed by any UI components that need them. 
 
   ![2020-07-15 15 19 04](https://user-images.githubusercontent.com/43154475/87606118-10b38b80-c6af-11ea-9daa-f509177a2ec5.gif)
              
 - ## Gameplay:
+  - The game is featured in the center viewport, with the Status Bar, Clock, and Navigation Buttons at the top of the screen.
+  - The object of the game is to flag all the mines, and uncover all the extraneous space. 
+  - Left click: uncovers a square. If it's a mine the player loses. If it's not a mine, it uncovers empty space.
+  - Right click: drops / picks up a flag. Flagged mines allow the player to proceed with the game, but if there is no mine it can be a problem.
+  - Double click: double clicking on a numeric square is a shortcut for clicking all the surrounding squares. Can speed things up if done carefully. 
+  - Score generation formula primarily uses mine count, mine density, elapsed time (ms). Small additional modifiers are added if player 
+    finishes in faster than expected time given the conditions. 
+  - Due to the competitive nature of scoring, I added a 3 second countdown to give the player a buffer before the game starts. 
+    This hopefully will makes it less stressful having a millisecond clock ticking down on the screen. 
+  - Sound effects are added to countdown numbers, losing 'boom' sound, and winning 'fanfare'. 
+  - Jiggling animation is added when a player loses. Confetti animation is added when a player wins. 
+  - If the player recieves a score in the top 10, he is prompted for a username in a highscore modal, then routed to the scoreboard page. 
+  
+  
 <img width="1280" alt="game-blue" src="https://user-images.githubusercontent.com/43154475/87493022-bf4cc300-c600-11ea-8b8d-903ccf056d41.png">
