@@ -63,5 +63,7 @@
   - Jiggling animation is added when a player loses. Confetti animation is added when a player wins. 
   - If the player recieves a score in the top 10, he is prompted for a username in a highscore modal, then routed to the scoreboard page. 
   
+  
+  
   <img width="1280" alt="game-blue" src="https://user-images.githubusercontent.com/43154475/87493022-bf4cc300-c600-11ea-8b8d-903ccf056d41.png">
 
