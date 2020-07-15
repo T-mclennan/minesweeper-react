@@ -3,11 +3,11 @@
   ### Click [here](https://covid-sweeper.com/) to try it out!
  
 - ## Tools and Architecture: 
-    This project was chosen to give practice with the AWS ecosystem, and was aided by the use of the [Serverless Stack](http://serverless-stack.com) guide.
+    This project was chosen to give practice with AWS Lambda and surrounding ecosystem.
  
   ##### Backend: 
     - The application and database are deployed as separate services, with the API repo found [here](https://github.com/T-mclennan/minesweeper-serverless-api).
-    - CloudFormation template is generated and deployed using Serverless.
+    - CloudFormation template is generated and deployed using [Serverless](https://www.serverless.com/framework/docs/)).
     - Static assets are hosted in S3 bucket, served by CloudFront with an AWS Lambda trigger. 
     - DynamoDB is used for storage, accessed via API Gateway, and protected by Cognito.
     - CloudWatch is used for Lambda and API access logs. 
