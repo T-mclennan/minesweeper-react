@@ -61,7 +61,7 @@
     This hopefully will makes it less stressful having a millisecond clock ticking down on the screen. 
   - Sound effects are added to countdown numbers, losing 'boom' sound, and winning 'fanfare'. 
   - Jiggling animation is added when a player loses. Confetti animation is added when a player wins. 
-  - If the player recieves a score in the top 10, he is prompted for a username in a highscore modal, then routed to the scoreboard page. 
+  - If the player recieves a top score, he is prompted for a username in a highscore modal, then routed to the scoreboard page. 
   
   
   
