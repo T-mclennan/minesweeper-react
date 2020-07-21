@@ -7,7 +7,7 @@
  
   ##### Backend: 
     - The application and database are deployed as separate services, with the API repo found [here](https://github.com/T-mclennan/minesweeper-serverless-api).
-    - CloudFormation template is generated and deployed using [Serverless](https://www.serverless.com/framework/docs/).
+    - CloudFormation template is generated and deployed using [Serverless](https://www.serverless.com/framework/docs/) framework.
     - Static assets are hosted in S3 bucket, served by CloudFront with an AWS Lambda trigger. 
     - DynamoDB is used for storage, accessed via API Gateway, and protected by Cognito.
     - CloudWatch is used for Lambda and API access logs. 
