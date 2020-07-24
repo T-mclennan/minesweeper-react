@@ -190,6 +190,7 @@ const Landing = () => {
             style={{ stroke: accent }}
             className={`icon far fa-2x fa-in`}
             id='scoreboard'
+            aria-label='scoreboard'
             onClick={() => history.push(`/scores`)}
           />
           <UncontrolledTooltip
@@ -219,6 +220,7 @@ const Landing = () => {
             style={{ fontSize: '1.75rem', stroke: accent }}
             className={`icon far fa-lg fa-in ${themeColor}`}
             id='settings'
+            aria-label='settings'
             onClick={() => history.push(`/settings`)}
           />
           <UncontrolledTooltip
@@ -232,6 +234,7 @@ const Landing = () => {
           <a
             href={'https://github.com/T-mclennan/minesweeper-react'}
             id='github'
+            aria-label='github'
           >
             <FontAwesomeIcon
               icon={faGithubAlt}

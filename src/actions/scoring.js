@@ -20,7 +20,7 @@ export const cleanScores = (data) => {
     return b.score - a.score;
   });
   if (totalScores.length > 9) {
-    return totalScores.slice(0, 9);
+    return totalScores.slice(0, 10);
   }
   return totalScores;
 };
