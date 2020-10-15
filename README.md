@@ -1,6 +1,6 @@
 # Covid-Sweeper: A minesweeper clone with serverless AWS backend
 
-  # *** Try out the [Live Application](https://covid-sweeper.com/)! ***
+  ## *** Try out the [Live Application](https://covid-sweeper.com/) ***
  
 - ## Tools and Architecture: 
     This project was chosen to give practice with AWS Lambda and surrounding ecosystem.
