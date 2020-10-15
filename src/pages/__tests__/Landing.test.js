@@ -5,15 +5,18 @@ import { MemoryRouter } from 'react-router';
 import '@testing-library/jest-dom/extend-expect';
 import App from '../../App';
 
+function setup() {
+  return render(
+    <MemoryRouter>
+      <App />
+    </MemoryRouter>
+  );
+}
+
+//Test that navigation links go where they should:
 describe('Footer', () => {
   test('"How it works" footer link points to the correct page', () => {
-    render(
-      <MemoryRouter>
-        <App />
-      </MemoryRouter>
-    );
-
-    //Checking navigation links go where they should:
+    setup();
 
     //Check Header:
     expect(
@@ -42,5 +45,18 @@ describe('Footer', () => {
     expect(
       screen.getByRole('heading', { name: /top players:/i })
     ).toBeInTheDocument();
+  });
+});
+
+describe('Game creation form', () => {
+  test('Selecting input in form and hitting submit button', () => {
+    render(
+      <MemoryRouter>
+        <App />
+      </MemoryRouter>
+    );
+    screen.debug();
+
+    const difficultyInput = screen.getByRole('', { name: /difficulty/i });
   });
 });

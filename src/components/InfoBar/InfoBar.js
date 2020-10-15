@@ -76,7 +76,7 @@ const ButtonStyle = {
   color: 'white',
   fontSize: '1rem',
   height: '3.2rem',
-  width: '12.5rem',
+  width: '10.5rem',
   fontWeight: 'bold',
   borderColor: 'white',
   borderRadius: '1rem',
